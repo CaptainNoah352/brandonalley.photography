@@ -1293,7 +1293,8 @@ p {
   }
 
   .header-shell {
-    padding: clamp(14px, 4vw, var(--header-shell-padding-y)) clamp(14px, 4vw, var(--header-padding-x));
+    padding: clamp(22px, 6vw, 32px) clamp(14px, 4vw, var(--header-padding-x));
+    min-height: 96px;
   }
 
   .logo {
