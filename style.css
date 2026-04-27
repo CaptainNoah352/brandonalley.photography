@@ -112,6 +112,13 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--scroll-offset);
+  background: #1B2D1E;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #0C1A0E;
+  }
 }
 
 body {
