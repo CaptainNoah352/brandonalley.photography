@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --scroll-offset: clamp(4.25rem, 6vw, 5.5rem);
   --header-padding-x: clamp(1.2rem, 3vw, 2.5rem);
   --header-shell-padding-y: clamp(0.65rem, 1.5vw, 0.9rem);
@@ -63,47 +63,6 @@
   --lightbox-overlay-opacity: 1;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #15100B;
-    --bg-soft: #1D1510;
-    --surface: #211810;
-    --color-text: #EDE0CC;
-    --color-bg: #15100B;
-    --text: var(--body-text);
-    --muted: #BBA98E;
-    --sage: var(--color-primary);
-    --olive-light: #687869;
-    --earth: var(--color-accent);
-    --terracotta: color-mix(in srgb, var(--color-accent) 78%, #ffffff 22%);
-    --header-bg: rgba(12, 26, 14, 0.96);
-    --site-bg: #15100B;
-    --footer-bg: #0C1A0E;
-    --footer-text: #B8CEA0;
-    --header-text: var(--footer-text);
-    --body-text: #EDE0CC;
-    --nav-icon: var(--footer-text);
-    --header-border: rgba(184, 206, 160, 0.25);
-    --logo-text: var(--footer-text);
-    --overlay-bg: rgba(21, 16, 11, 0.92);
-    --menu-close-color: color-mix(in srgb, var(--color-primary) 45%, #f5f2ed 55%);
-    --mobile-nav-text: color-mix(in srgb, var(--color-primary) 36%, #f5f2ed 64%);
-    --gallery-hover-shadow: 0 16px 28px rgba(0, 0, 0, 0.42);
-    --about-hero-bg: linear-gradient(160deg, #1D1510 0%, #160F09 100%);
-    --section-border: color-mix(in srgb, var(--color-accent) 34%, transparent);
-    --card-border: color-mix(in srgb, var(--color-accent) 30%, transparent);
-    --card-shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.32);
-    --divider: rgba(200, 185, 154, 0.18);
-    --footer-border: rgba(184, 206, 160, 0.25);
-    --lightbox-meta-bg: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
-    --lightbox-caption: rgba(255, 255, 255, 0.88);
-    --lightbox-counter: rgba(255, 255, 255, 0.64);
-    --lightbox-control: rgba(255, 255, 255, 0.76);
-    --lightbox-control-hover: rgba(255, 255, 255, 0.98);
-  }
-
-  body::before { opacity: 0.055; }
-}
 
 * {
   box-sizing: border-box;
@@ -112,7 +71,9 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--scroll-offset);
+  background: #1B2D1E;
 }
+
 
 body {
   margin: 0;
