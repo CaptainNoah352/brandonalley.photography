@@ -364,8 +364,13 @@ function renderFeaturedCarousel(images) {
     dom.carouselTrack.children[currentIndex]?.classList.remove("is-active");
     dom.carouselDots.children[currentIndex]?.classList.remove("is-active");
     currentIndex = ((index % slides.length) + slides.length) % slides.length;
-    dom.carouselTrack.children[currentIndex]?.classList.add("is-active");
+    const activeSlide = dom.carouselTrack.children[currentIndex];
+    activeSlide?.classList.add("is-active");
     dom.carouselDots.children[currentIndex]?.classList.add("is-active");
+    if (activeSlide) {
+      const padLeft = parseFloat(getComputedStyle(dom.homeCarousel).paddingLeft) || 0;
+      dom.carouselTrack.style.transform = `translateX(-${activeSlide.offsetLeft - padLeft}px)`;
+    }
   }
 
   function startAuto() {
