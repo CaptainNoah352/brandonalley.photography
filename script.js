@@ -78,6 +78,78 @@ const GALLERY_IMAGES = [
 
 const pageType = document.body?.dataset?.page || "home";
 
+
+const FEATURED_PHOTO_STORAGE_KEY = "featuredPhotoMap";
+
+function readFeaturedPhotoOverrides() {
+  try {
+    const rawValue = window.localStorage.getItem(FEATURED_PHOTO_STORAGE_KEY);
+    if (!rawValue) return {};
+    const parsed = JSON.parse(rawValue);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+    return Object.entries(parsed).reduce((acc, [src, value]) => {
+      if (typeof src !== "string") return acc;
+      if (typeof value !== "boolean") return acc;
+      acc[src] = value;
+      return acc;
+    }, {});
+  } catch (_error) {
+    return {};
+  }
+}
+
+function writeFeaturedPhotoOverrides(featuredPhotoMap) {
+  try {
+    window.localStorage.setItem(FEATURED_PHOTO_STORAGE_KEY, JSON.stringify(featuredPhotoMap));
+  } catch (_error) {
+    // Ignore write errors (private browsing/storage unavailable).
+  }
+}
+
+function mergeGalleryImagesWithOverrides(sourceImages, featuredPhotoMap) {
+  return normalizeGalleryImages(sourceImages).map((image) => ({
+    ...image,
+    is_featured: Object.prototype.hasOwnProperty.call(featuredPhotoMap, image.src)
+      ? featuredPhotoMap[image.src]
+      : Boolean(image.is_featured),
+  }));
+}
+
+function updateMergedGalleryImages() {
+  const overrides = readFeaturedPhotoOverrides();
+  const mergedImages = mergeGalleryImagesWithOverrides(GALLERY_IMAGES, overrides);
+  state.orderedGalleryImages = seededShuffle(mergedImages, "v1");
+}
+
+function updateFeaturedPhotoOverride(src, isFeatured) {
+  if (!src) return;
+  const existingOverrides = readFeaturedPhotoOverrides();
+  const canonicalImage = normalizeGalleryImages(GALLERY_IMAGES).find((image) => image.src === src);
+  const canonicalFeatured = canonicalImage ? Boolean(canonicalImage.is_featured) : false;
+
+  if (isFeatured === canonicalFeatured) {
+    delete existingOverrides[src];
+  } else {
+    existingOverrides[src] = Boolean(isFeatured);
+  }
+
+  writeFeaturedPhotoOverrides(existingOverrides);
+  updateMergedGalleryImages();
+  renderCurrentPageGallery();
+}
+
+function bindFeaturedToggleEvents() {
+  document.querySelectorAll('[data-featured-toggle][data-image-src]').forEach((toggle) => {
+    if (toggle.dataset.featuredToggleBound === "true") return;
+    toggle.dataset.featuredToggleBound = "true";
+
+    toggle.addEventListener("change", (event) => {
+      const imageSrc = event.currentTarget?.dataset?.imageSrc || "";
+      updateFeaturedPhotoOverride(imageSrc, Boolean(event.currentTarget?.checked));
+    });
+  });
+}
+
 const dom = {
   menuToggle: document.getElementById("menuToggle"),
   mobileMenu: document.getElementById("mobileMenu"),
@@ -405,6 +477,8 @@ function renderCurrentPageGallery() {
   } else {
     renderGallery(state.orderedGalleryImages);
   }
+
+  bindFeaturedToggleEvents();
 }
 
 function setMobileMenuOpen(isOpen) {
@@ -562,8 +636,7 @@ function initializeGallery() {
   updateActiveNavLink();
   window.addEventListener("scroll", updateActiveNavLink, { passive: true });
 
-  state.orderedGalleryImages = normalizeGalleryImages(seededShuffle(GALLERY_IMAGES, "v1"));
-
+  updateMergedGalleryImages();
   renderCurrentPageGallery();
   initializeScrollReveal();
   requestAnimationFrame(alignInitialHashTarget);
