@@ -81,15 +81,20 @@ const pageType = document.body?.dataset?.page || "home";
 
 const FEATURED_PHOTO_STORAGE_KEY = "featuredPhotoMap";
 
+function getCanonicalGalleryImages() {
+  return normalizeGalleryImages(GALLERY_IMAGES);
+}
+
 function readFeaturedPhotoOverrides() {
   try {
     const rawValue = window.localStorage.getItem(FEATURED_PHOTO_STORAGE_KEY);
     if (!rawValue) return {};
     const parsed = JSON.parse(rawValue);
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+
+    const canonicalSrcSet = new Set(getCanonicalGalleryImages().map((image) => image.src));
     return Object.entries(parsed).reduce((acc, [src, value]) => {
-      if (typeof src !== "string") return acc;
-      if (typeof value !== "boolean") return acc;
+      if (!canonicalSrcSet.has(src) || typeof value !== "boolean") return acc;
       acc[src] = value;
       return acc;
     }, {});
@@ -107,7 +112,7 @@ function writeFeaturedPhotoOverrides(featuredPhotoMap) {
 }
 
 function mergeGalleryImagesWithOverrides(sourceImages, featuredPhotoMap) {
-  return normalizeGalleryImages(sourceImages).map((image) => ({
+  return sourceImages.map((image) => ({
     ...image,
     is_featured: Object.prototype.hasOwnProperty.call(featuredPhotoMap, image.src)
       ? featuredPhotoMap[image.src]
@@ -116,24 +121,37 @@ function mergeGalleryImagesWithOverrides(sourceImages, featuredPhotoMap) {
 }
 
 function updateMergedGalleryImages() {
-  const overrides = readFeaturedPhotoOverrides();
-  const mergedImages = mergeGalleryImagesWithOverrides(GALLERY_IMAGES, overrides);
+  state.featuredPhotoOverrides = readFeaturedPhotoOverrides();
+  const canonicalImages = getCanonicalGalleryImages();
+  const mergedImages = mergeGalleryImagesWithOverrides(canonicalImages, state.featuredPhotoOverrides);
   state.orderedGalleryImages = seededShuffle(mergedImages, "v1");
+}
+
+function syncFeaturedToggleUi() {
+  document.querySelectorAll('[data-featured-toggle][data-image-src]').forEach((toggle) => {
+    const imageSrc = toggle.dataset.imageSrc || "";
+    const imageData = state.orderedGalleryImages.find((image) => image.src === imageSrc);
+    if (!imageData) return;
+    toggle.checked = Boolean(imageData.is_featured);
+  });
 }
 
 function updateFeaturedPhotoOverride(src, isFeatured) {
   if (!src) return;
-  const existingOverrides = readFeaturedPhotoOverrides();
-  const canonicalImage = normalizeGalleryImages(GALLERY_IMAGES).find((image) => image.src === src);
-  const canonicalFeatured = canonicalImage ? Boolean(canonicalImage.is_featured) : false;
 
-  if (isFeatured === canonicalFeatured) {
-    delete existingOverrides[src];
+  const canonicalImage = getCanonicalGalleryImages().find((image) => image.src === src);
+  if (!canonicalImage) return;
+
+  const canonicalFeatured = Boolean(canonicalImage.is_featured);
+  const nextOverrides = { ...state.featuredPhotoOverrides };
+
+  if (Boolean(isFeatured) === canonicalFeatured) {
+    delete nextOverrides[src];
   } else {
-    existingOverrides[src] = Boolean(isFeatured);
+    nextOverrides[src] = Boolean(isFeatured);
   }
 
-  writeFeaturedPhotoOverrides(existingOverrides);
+  writeFeaturedPhotoOverrides(nextOverrides);
   updateMergedGalleryImages();
   renderCurrentPageGallery();
 }
@@ -144,8 +162,10 @@ function bindFeaturedToggleEvents() {
     toggle.dataset.featuredToggleBound = "true";
 
     toggle.addEventListener("change", (event) => {
-      const imageSrc = event.currentTarget?.dataset?.imageSrc || "";
-      updateFeaturedPhotoOverride(imageSrc, Boolean(event.currentTarget?.checked));
+      const target = event.currentTarget;
+      if (!(target instanceof HTMLInputElement)) return;
+      const imageSrc = target.dataset.imageSrc || "";
+      updateFeaturedPhotoOverride(imageSrc, target.checked);
     });
   });
 }
@@ -173,6 +193,7 @@ const dom = {
 
 const state = {
   orderedGalleryImages: [],
+  featuredPhotoOverrides: {},
   availableLightboxItems: [],
   currentLightboxPosition: 0,
   lightboxUiVisible: true,
@@ -479,6 +500,7 @@ function renderCurrentPageGallery() {
   }
 
   bindFeaturedToggleEvents();
+  syncFeaturedToggleUi();
 }
 
 function setMobileMenuOpen(isOpen) {
