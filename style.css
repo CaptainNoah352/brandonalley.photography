@@ -930,6 +930,61 @@ p {
   letter-spacing: 0.005em;
 }
 
+/* About Portrait */
+
+.about-portrait-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+  max-width: var(--content-max-width);
+  margin: 0 auto 3.5rem;
+}
+
+.about-portrait-fig {
+  margin: 0;
+  position: relative;
+  box-shadow: 6px 10px 32px rgba(28, 16, 6, 0.14), 0 2px 6px rgba(28, 16, 6, 0.07);
+}
+
+.about-portrait-fig::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -10px;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent),
+    color-mix(in srgb, var(--color-accent) 0%, transparent 100%)
+  );
+  pointer-events: none;
+}
+
+.about-portrait-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;
+  filter: sepia(6%) contrast(1.02) brightness(0.99);
+}
+
+.about-portrait-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+
+.about-portrait-copy .eyebrow {
+  margin-bottom: 1.1rem;
+}
+
+.about-portrait-copy .about-story-text p:last-child {
+  margin-bottom: 0;
+}
+
 /* Contact Section */
 
 .contact-section-full {
@@ -1298,6 +1353,23 @@ p {
 
   .lightbox-tap-zone {
     width: 18vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .about-portrait-row {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .about-portrait-fig {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .about-portrait-fig::before {
+    display: none;
   }
 }
 
