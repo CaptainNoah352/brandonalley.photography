@@ -35,11 +35,6 @@ const GALLERY_IMAGES = [
     is_featured: true,
   },
   {
-    src: "https://live.staticflickr.com/65535/55198253464_4d51f096c6_b.jpg",
-    alt: "Photography by Brandon Alley",
-    is_featured: true,
-  },
-  {
     src: "https://live.staticflickr.com/65535/55198253354_35cd84e9f9_b.jpg",
     alt: "Photography by Brandon Alley",
     is_featured: true,
