@@ -97,7 +97,6 @@ const dom = {
   lightboxPrevZone: document.getElementById("lightboxPrevZone"),
   lightboxNextZone: document.getElementById("lightboxNextZone"),
   lightboxFigure: document.getElementById("lightboxFigure"),
-  adminGrid: document.getElementById("adminGrid"),
 };
 
 const state = {
@@ -401,75 +400,9 @@ function renderFeaturedCarousel(images) {
 }
 
 
-function renderAdminGrid(images) {
-  if (!dom.adminGrid) return;
-  dom.adminGrid.innerHTML = "";
-
-  const uniqueImages = normalizeGalleryImages(images).filter((image, index, allImages) => {
-    const key = image.id || image.src;
-    return allImages.findIndex((entry) => (entry.id || entry.src) === key) === index;
-  });
-
-  if (!uniqueImages.length) {
-    dom.adminGrid.innerHTML = '<p class="admin-empty-state">No image entries found in GALLERY_IMAGES.</p>';
-    return;
-  }
-
-  uniqueImages.forEach((image, index) => {
-    const row = document.createElement("article");
-    row.className = "admin-photo-row";
-
-    const thumb = document.createElement("img");
-    thumb.className = "admin-thumb";
-    thumb.src = image.src;
-    thumb.alt = image.alt || `Gallery image ${index + 1}`;
-    thumb.loading = "lazy";
-    thumb.decoding = "async";
-
-    const info = document.createElement("div");
-    info.className = "admin-photo-meta";
-
-    const title = document.createElement("p");
-    title.className = "admin-photo-title";
-    title.textContent = image.title || image.alt || `Image ${index + 1}`;
-
-    const alt = document.createElement("p");
-    alt.className = "admin-photo-alt";
-    alt.textContent = `Alt: ${image.alt || "(none)"}`;
-
-    const src = document.createElement("p");
-    src.className = "admin-photo-src";
-    src.textContent = image.src;
-
-    const controls = document.createElement("label");
-    controls.className = "admin-featured-toggle";
-    const featured = document.createElement("input");
-    featured.type = "checkbox";
-    featured.checked = Boolean(image.is_featured);
-    featured.setAttribute("aria-label", `Featured toggle for ${image.alt || `Image ${index + 1}`}`);
-
-    featured.addEventListener("change", () => {
-      image.is_featured = featured.checked;
-      controls.dataset.featured = featured.checked ? "true" : "false";
-    });
-
-    controls.dataset.featured = featured.checked ? "true" : "false";
-    controls.append(featured, document.createTextNode(" Featured"));
-
-    info.append(title, alt, src, controls);
-    row.append(thumb, info);
-    dom.adminGrid.appendChild(row);
-  });
-}
-
 function renderCurrentPageGallery() {
   if (pageType === "home") {
     renderFeaturedCarousel(state.orderedGalleryImages);
-    return;
-  }
-
-  if (pageType === "admin") {
-    renderAdminGrid(state.orderedGalleryImages);
     return;
   }
 
@@ -575,12 +508,11 @@ function updateActiveNavLink() {
   const navLinks = document.querySelectorAll(".site-nav > a");
   if (!navLinks.length) return;
 
-  if (pageType === "portfolio" || pageType === "admin") {
+  if (pageType === "portfolio") {
     navLinks.forEach((link) => {
       const href = link.getAttribute("href") || "";
       const isPortfolio = href === "portfolio.html" || href.endsWith("/portfolio.html");
-      const isAdmin = href === "admin.html" || href.endsWith("/admin.html");
-      link.classList.toggle("active", (pageType === "portfolio" && isPortfolio) || (pageType === "admin" && isAdmin));
+      link.classList.toggle("active", isPortfolio);
     });
     return;
   }
