@@ -5,6 +5,21 @@
 // - is_featured: true = shows in the homepage carousel
 const GALLERY_IMAGES = [
   {
+    src: "https://live.staticflickr.com/65535/55249900291_75c53ab3e9_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55249990758_8bf1386914_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55249847956_9420a2b4ba_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
     src: "https://live.staticflickr.com/65535/55225222323_4a86a6f175_b.jpg",
     alt: "Jae & Sandra Vow Renewal",
     is_featured: true,
