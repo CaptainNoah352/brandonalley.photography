@@ -533,6 +533,24 @@ function updateActiveNavLink() {
     return;
   }
 
+  if (pageType === "contact") {
+    navLinks.forEach((link) => {
+      const href = link.getAttribute("href") || "";
+      const isContact = href === "contact.html" || href.endsWith("/contact.html");
+      link.classList.toggle("active", isContact);
+    });
+    return;
+  }
+
+  if (pageType === "about") {
+    navLinks.forEach((link) => {
+      const href = link.getAttribute("href") || "";
+      const isAbout = href === "about.html" || href.endsWith("/about.html");
+      link.classList.toggle("active", isAbout);
+    });
+    return;
+  }
+
   let currentId = "";
   document.querySelectorAll("section[id]").forEach((section) => {
     if (window.scrollY >= section.offsetTop - 120) currentId = section.id;
