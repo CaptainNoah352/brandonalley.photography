@@ -340,7 +340,10 @@ function renderFeaturedCarousel(images) {
     img.alt = image.alt || "";
     img.loading = i === 0 ? "eager" : "lazy";
     img.decoding = "async";
-    img.addEventListener("load", refreshLightboxItems);
+    img.addEventListener("load", () => {
+      refreshLightboxItems();
+      if (i === currentIndex) fitCarouselToImage(img);
+    });
     img.addEventListener("error", () => { img.dataset.broken = "true"; refreshLightboxItems(); });
 
     slide.appendChild(img);
@@ -360,12 +363,25 @@ function renderFeaturedCarousel(images) {
 
   refreshLightboxItems();
 
+  function fitCarouselToImage(img) {
+    if (!img || !dom.homeCarousel) return;
+    if (!img.naturalWidth || !img.naturalHeight) return;
+    const w = dom.homeCarousel.offsetWidth || window.innerWidth;
+    const ratio = img.naturalWidth / img.naturalHeight;
+    const h = Math.round(Math.max(180, Math.min(w / ratio, window.innerHeight * 0.9)));
+    dom.homeCarousel.style.height = h + "px";
+  }
+
   function goToSlide(index) {
     dom.carouselTrack.children[currentIndex]?.classList.remove("is-active");
     dom.carouselDots.children[currentIndex]?.classList.remove("is-active");
     currentIndex = ((index % slides.length) + slides.length) % slides.length;
     dom.carouselTrack.children[currentIndex]?.classList.add("is-active");
     dom.carouselDots.children[currentIndex]?.classList.add("is-active");
+    const activeImg = dom.carouselTrack.children[currentIndex]?.querySelector("img");
+    if (activeImg?.complete && activeImg.naturalWidth) {
+      fitCarouselToImage(activeImg);
+    }
   }
 
   function startAuto() {
@@ -390,6 +406,11 @@ function renderFeaturedCarousel(images) {
 
   dom.homeCarousel.addEventListener("mouseenter", () => clearInterval(autoTimer));
   dom.homeCarousel.addEventListener("mouseleave", startAuto);
+
+  window.addEventListener("resize", () => {
+    const activeImg = dom.carouselTrack.children[currentIndex]?.querySelector("img");
+    if (activeImg?.naturalWidth) fitCarouselToImage(activeImg);
+  }, { passive: true });
 
   startAuto();
 }

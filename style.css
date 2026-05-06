@@ -528,9 +528,10 @@ p {
 .home-slideshow {
   position: relative;
   width: 100%;
-  height: clamp(320px, 62vh, 860px);
+  height: clamp(220px, 56.25vw, 860px);
   overflow: hidden;
   background: var(--bg-soft);
+  transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .home-slideshow::after {
@@ -570,7 +571,7 @@ p {
 .carousel-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
@@ -653,7 +654,7 @@ p {
 
 @media (max-width: 600px) {
   .home-slideshow {
-    height: clamp(260px, 58vh, 520px);
+    height: clamp(180px, 56.25vw, 520px);
   }
   .carousel-btn {
     opacity: 1;
