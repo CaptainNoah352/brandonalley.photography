@@ -730,7 +730,7 @@ p {
   min-height: 100svh;
   display: grid;
   place-items: center;
-  padding: clamp(5rem, 8vw, 8rem) clamp(1.2rem, 4vw, 4rem) 6rem;
+  padding: clamp(3rem, 5vw, 5rem) clamp(1.2rem, 4vw, 4rem) 4rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -752,7 +752,7 @@ p {
   text-transform: uppercase;
   letter-spacing: 0.26em;
   color: var(--muted);
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
 }
 
 .home-intro-headline {
@@ -762,7 +762,7 @@ p {
   line-height: 0.98;
   letter-spacing: 0;
   color: var(--color-text);
-  margin: 0 0 1.8rem;
+  margin: 0 0 1rem;
 }
 
 .home-intro-tagline {
@@ -771,7 +771,7 @@ p {
   line-height: 1.8;
   color: var(--muted);
   font-style: italic;
-  margin: 0 auto 3rem;
+  margin: 0 auto 2rem;
   max-width: 38ch;
 }
 
