@@ -1519,6 +1519,7 @@ p {
 
 .project-card {
   border: 1px solid var(--card-border);
+  border-top: 3px solid var(--color-primary);
   background: var(--surface);
   box-shadow: var(--card-shadow-soft);
   padding: clamp(1.8rem, 4vw, 3rem);
@@ -1526,7 +1527,9 @@ p {
 
 .project-card-header {
   max-width: 680px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--divider);
 }
 
 .project-card-meta {
@@ -1574,27 +1577,30 @@ p {
 }
 
 .project-progress-block {
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--divider);
 }
 
 .project-progress-label {
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
 }
 
 .project-progress-count {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--muted) 60%, var(--color-text) 40%);
 }
 
 .project-progress-bar {
   width: 100%;
-  height: 3px;
+  height: 6px;
   background: color-mix(in srgb, var(--color-primary) 16%, var(--bg-soft) 84%);
   border-radius: 999px;
   overflow: hidden;
@@ -1627,8 +1633,18 @@ p {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.species-card:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 42%, transparent);
+  background: var(--surface);
+  box-shadow: 0 2px 8px rgba(28, 16, 6, 0.09);
+}
+
 .species-card--complete {
   border-color: color-mix(in srgb, var(--color-primary) 38%, transparent);
+}
+
+.species-card--complete:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 64%, transparent);
 }
 
 .species-status-dot {
@@ -1663,6 +1679,11 @@ p {
   font-style: italic;
   color: var(--muted);
   line-height: 1.3;
+}
+
+.species-grid-eyebrow {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 600px) {
