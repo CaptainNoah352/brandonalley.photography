@@ -551,6 +551,15 @@ function updateActiveNavLink() {
     return;
   }
 
+  if (pageType === "projects") {
+    navLinks.forEach((link) => {
+      const href = link.getAttribute("href") || "";
+      const isProjects = href === "projects.html" || href.endsWith("/projects.html");
+      link.classList.toggle("active", isProjects);
+    });
+    return;
+  }
+
   let currentId = "";
   document.querySelectorAll("section[id]").forEach((section) => {
     if (window.scrollY >= section.offsetTop - 120) currentId = section.id;
