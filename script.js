@@ -7,6 +7,26 @@
 // - species:     scientific name, e.g. "Ardea herodias" — links photo to species card
 const GALLERY_IMAGES = [
   {
+    src: "https://live.staticflickr.com/65535/55268958145_c1c8cb087b_b.jpg",
+    alt: "Silver Springs",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55268957900_7aff49f7d3_b.jpg",
+    alt: "Silver Springs",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55267648392_f20c890bff_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55250254275_f0fc9c0970_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
     src: "https://live.staticflickr.com/65535/55249900291_75c53ab3e9_b.jpg",
     alt: "Photography by Brandon Alley",
     is_featured: true,
