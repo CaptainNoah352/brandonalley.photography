@@ -3,6 +3,8 @@
 // - src:         full image URL
 // - alt:         describe the photo (used in lightbox caption)
 // - is_featured: true = shows in the homepage carousel
+// - project:     project slug, e.g. "herons" — adds photo to that project gallery
+// - species:     scientific name, e.g. "Ardea herodias" — links photo to species card
 const GALLERY_IMAGES = [
   {
     src: "https://live.staticflickr.com/65535/55249900291_75c53ab3e9_b.jpg",
@@ -97,6 +99,7 @@ const dom = {
   lightboxPrevZone: document.getElementById("lightboxPrevZone"),
   lightboxNextZone: document.getElementById("lightboxNextZone"),
   lightboxFigure: document.getElementById("lightboxFigure"),
+  projectGallery: document.getElementById("project-gallery"),
 };
 
 const state = {
@@ -176,9 +179,10 @@ function refreshLightboxItems() {
     ).filter((img) => img.dataset.broken !== "true");
     return;
   }
-  if (!dom.gallery) return;
+  const galleryEl = dom.projectGallery || dom.gallery;
+  if (!galleryEl) return;
   state.availableLightboxItems = Array.from(
-    dom.gallery.querySelectorAll(".gallery-item img")
+    galleryEl.querySelectorAll(".gallery-item img")
   ).filter((img) => img.dataset.broken !== "true");
 }
 
@@ -416,9 +420,128 @@ function renderFeaturedCarousel(images) {
 }
 
 
+function renderProjectGallery(projectSlug) {
+  const container = dom.projectGallery;
+  if (!container) return;
+
+  const projectImages = state.orderedGalleryImages.filter(
+    (img) => img.project === projectSlug
+  );
+
+  container.innerHTML = "";
+
+  if (!projectImages.length) {
+    const emptyState = document.createElement("div");
+    emptyState.className = "gallery-empty-state";
+    emptyState.setAttribute("role", "status");
+    emptyState.innerHTML = `<h3>No photos yet</h3><p>Photos will appear here as species are documented.</p>`;
+    container.appendChild(emptyState);
+    refreshLightboxItems();
+    return;
+  }
+
+  projectImages.forEach((image) => {
+    const article = document.createElement("article");
+    article.className = "gallery-item";
+
+    const img = document.createElement("img");
+    img.src = image.src;
+    img.alt = image.alt;
+    img.loading = "lazy";
+    img.decoding = "async";
+    if (image.species) img.dataset.species = image.species;
+
+    img.addEventListener("load", () => {
+      img.classList.add("is-visible");
+      refreshLightboxItems();
+      hydrateSpeciesCards();
+    });
+
+    img.addEventListener("error", () => {
+      img.dataset.broken = "true";
+      article.classList.add("is-broken");
+      refreshLightboxItems();
+    });
+
+    article.addEventListener("click", () => {
+      if (img.dataset.broken === "true") return;
+      openLightboxByImageNode(img);
+    });
+
+    article.appendChild(img);
+    container.appendChild(article);
+  });
+
+  refreshLightboxItems();
+  hydrateSpeciesCards();
+}
+
+function hydrateSpeciesCards() {
+  if (!dom.projectGallery) return;
+  const cards = document.querySelectorAll(".species-card[data-species]");
+  if (!cards.length) return;
+
+  const galleryImgs = Array.from(
+    dom.projectGallery.querySelectorAll(".gallery-item img[data-species]")
+  );
+
+  cards.forEach((card) => {
+    if (card.dataset.hydrated) return;
+    const speciesKey = card.dataset.species;
+    const matchingImg = galleryImgs.find(
+      (img) => img.dataset.species === speciesKey && img.dataset.broken !== "true"
+    );
+    if (!matchingImg || !matchingImg.complete || !matchingImg.naturalWidth) return;
+
+    card.classList.remove("species-card--pending");
+    card.classList.add("species-card--complete");
+    card.dataset.hydrated = "true";
+    card.style.cursor = "pointer";
+
+    const thumb = document.createElement("img");
+    thumb.src = matchingImg.src;
+    thumb.alt = "";
+    thumb.className = "species-thumb";
+    thumb.loading = "lazy";
+    thumb.decoding = "async";
+    thumb.setAttribute("aria-hidden", "true");
+    card.insertBefore(thumb, card.querySelector(".species-status-dot"));
+
+    card.addEventListener("click", () => {
+      openLightboxByImageNode(matchingImg);
+    });
+  });
+}
+
+function updateProjectProgress(projectSlug, totalSpecies) {
+  const projectImages = state.orderedGalleryImages.filter(
+    (img) => img.project === projectSlug && img.species
+  );
+  const documentedSpecies = new Set(projectImages.map((img) => img.species));
+  const count = documentedSpecies.size;
+  const pct = totalSpecies > 0 ? Math.round((count / totalSpecies) * 100) : 0;
+
+  const countEl = document.getElementById("heronProgressCount");
+  const barEl = document.querySelector(".project-progress-bar");
+  const fillEl = document.querySelector(".project-progress-fill");
+
+  if (countEl) countEl.textContent = `${count} of ${totalSpecies} species documented`;
+  if (fillEl) fillEl.style.width = `${pct}%`;
+  if (barEl) {
+    barEl.setAttribute("aria-valuenow", String(count));
+    barEl.setAttribute("aria-valuemax", String(totalSpecies));
+  }
+}
+
 function renderCurrentPageGallery() {
   if (pageType === "home") {
     renderFeaturedCarousel(state.orderedGalleryImages);
+    return;
+  }
+
+  if (pageType === "projects") {
+    renderProjectGallery("herons");
+    updateProjectProgress("herons", 12);
     return;
   }
 
