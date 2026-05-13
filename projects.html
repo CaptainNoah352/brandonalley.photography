@@ -101,86 +101,91 @@
               </div>
             </div>
 
+            <div class="project-gallery-section scroll-reveal">
+              <p class="eyebrow project-gallery-eyebrow">Photos</p>
+              <div class="gallery" id="project-gallery" aria-live="polite"></div>
+            </div>
+
             <p class="eyebrow species-grid-eyebrow">Species Checklist</p>
             <ul class="species-grid scroll-reveal" aria-label="Florida heron species checklist">
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Ardea herodias">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Great Blue Heron</p>
                   <p class="species-scientific">Ardea herodias</p>
                 </div>
               </li>
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Ardea alba">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Great Egret</p>
                   <p class="species-scientific">Ardea alba</p>
                 </div>
               </li>
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Egretta thula">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Snowy Egret</p>
                   <p class="species-scientific">Egretta thula</p>
                 </div>
               </li>
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Egretta caerulea">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Little Blue Heron</p>
                   <p class="species-scientific">Egretta caerulea</p>
                 </div>
               </li>
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Egretta tricolor">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Tricolored Heron</p>
                   <p class="species-scientific">Egretta tricolor</p>
                 </div>
               </li>
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Egretta rufescens">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Reddish Egret</p>
                   <p class="species-scientific">Egretta rufescens</p>
                 </div>
               </li>
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Bubulcus ibis">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Cattle Egret</p>
                   <p class="species-scientific">Bubulcus ibis</p>
                 </div>
               </li>
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Butorides virescens">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Green Heron</p>
                   <p class="species-scientific">Butorides virescens</p>
                 </div>
               </li>
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Nycticorax nycticorax">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Black-crowned Night-Heron</p>
                   <p class="species-scientific">Nycticorax nycticorax</p>
                 </div>
               </li>
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Nyctanassa violacea">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Yellow-crowned Night-Heron</p>
                   <p class="species-scientific">Nyctanassa violacea</p>
                 </div>
               </li>
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Ardea herodias occidentalis">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Great White Heron</p>
                   <p class="species-scientific">Ardea herodias occidentalis</p>
                 </div>
               </li>
-              <li class="species-card species-card--pending">
+              <li class="species-card species-card--pending" data-species="Ixobrychus exilis">
                 <div class="species-status-dot" aria-hidden="true"></div>
                 <div class="species-card-body">
                   <p class="species-common">Least Bittern</p>
@@ -200,6 +205,21 @@
         <p>&copy; <span id="year"></span> Brandon | Brandon Alley Photography</p>
       </div>
     </footer>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Gallery lightbox">
+      <button class="lightbox-control lightbox-close" id="lightboxClose" type="button" aria-label="Close fullscreen image">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <button class="lightbox-tap-zone lightbox-tap-zone-prev" id="lightboxPrevZone" type="button" aria-label="Previous image"></button>
+      <button class="lightbox-tap-zone lightbox-tap-zone-next" id="lightboxNextZone" type="button" aria-label="Next image"></button>
+      <figure class="lightbox-figure" id="lightboxFigure">
+        <img id="lightboxImage" src="" alt="" />
+        <figcaption class="lightbox-meta">
+          <p id="lightboxCaption"></p>
+          <p class="lightbox-counter" id="lightboxCounter" aria-live="polite"></p>
+        </figcaption>
+      </figure>
+    </div>
 
     <script src="script.js"></script>
   </body>

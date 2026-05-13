@@ -1686,6 +1686,34 @@ p {
   margin-bottom: 1rem;
 }
 
+.project-gallery-section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--divider);
+}
+
+.project-gallery-eyebrow {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.project-gallery-section .gallery {
+  columns: 3;
+}
+
+.species-thumb {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.species-card--complete .species-status-dot {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .project-card {
     padding: 1.5rem;
