@@ -28,8 +28,10 @@ const GALLERY_IMAGES = [
   },
   {
     src: "https://live.staticflickr.com/65535/55249900291_75c53ab3e9_b.jpg",
-    alt: "Photography by Brandon Alley",
+    alt: "Great Egret",
     is_featured: true,
+    project: "herons",
+    species: "Ardea alba",
   },
   {
     src: "https://live.staticflickr.com/65535/55249990758_8bf1386914_b.jpg",
@@ -48,8 +50,10 @@ const GALLERY_IMAGES = [
   },
   {
     src: "https://live.staticflickr.com/65535/55201917211_89fd523944_b.jpg",
-    alt: "Photography by Brandon Alley",
+    alt: "Snowy Egret",
     is_featured: true,
+    project: "herons",
+    species: "Egretta thula",
   },
   {
     src: "https://live.staticflickr.com/65535/55198152423_a55f5c0f74_b.jpg",
