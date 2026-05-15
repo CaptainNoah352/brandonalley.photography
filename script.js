@@ -201,9 +201,7 @@ function seededShuffle(array, seedText) {
 }
 
 function flickrPageUrlFromSrc(src) {
-  const match = (src || "").match(/\/(\d+)_[0-9a-f]+_[a-z]+\.jpg$/i);
-  if (!match) return null;
-  return `https://www.flickr.com/photos/204244048@N05/${match[1]}/`;
+  return src || null;
 }
 
 function refreshLightboxItems() {
