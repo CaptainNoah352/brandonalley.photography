@@ -1274,9 +1274,9 @@ p {
   align-items: center;
   gap: 0.4em;
   margin-top: 0.15rem;
-  padding: 0 0.75em;
-  height: 2rem;
-  font-size: 0.72rem;
+  padding: 0 0.5em;
+  height: 1.5rem;
+  font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.07em;
   text-transform: uppercase;
