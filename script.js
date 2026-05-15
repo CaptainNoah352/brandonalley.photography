@@ -35,11 +35,6 @@ const GALLERY_IMAGES = [
     species: "Egretta thula",
   },
   {
-    src: "https://live.staticflickr.com/65535/55250254275_f0fc9c0970_b.jpg",
-    alt: "Photography by Brandon Alley",
-    is_featured: true,
-  },
-  {
     src: "https://live.staticflickr.com/65535/55249900291_75c53ab3e9_b.jpg",
     alt: "Great Egret",
     is_featured: true,
@@ -90,11 +85,6 @@ const GALLERY_IMAGES = [
   },
   {
     src: "https://live.staticflickr.com/65535/55174718119_fcc96e9679_b.jpg",
-    alt: "Photography by Brandon Alley",
-    is_featured: true,
-  },
-  {
-    src: "https://live.staticflickr.com/65535/55174862805_62b4b2bb62_b.jpg",
     alt: "Photography by Brandon Alley",
     is_featured: true,
   },
