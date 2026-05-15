@@ -126,6 +126,7 @@ const dom = {
   lightboxPrevZone: document.getElementById("lightboxPrevZone"),
   lightboxNextZone: document.getElementById("lightboxNextZone"),
   lightboxFigure: document.getElementById("lightboxFigure"),
+  lightboxFlickrLink: document.getElementById("lightboxFlickrLink"),
   projectGallery: document.getElementById("project-gallery"),
 };
 
@@ -199,6 +200,12 @@ function seededShuffle(array, seedText) {
   return shuffled;
 }
 
+function flickrPageUrlFromSrc(src) {
+  const match = (src || "").match(/\/(\d+)_[0-9a-f]+_[a-z]+\.jpg$/i);
+  if (!match) return null;
+  return `https://www.flickr.com/photos/204244048@N05/${match[1]}/`;
+}
+
 function refreshLightboxItems() {
   if (dom.homeCarousel) {
     state.availableLightboxItems = Array.from(
@@ -228,6 +235,11 @@ function updateLightboxView(direction = "next") {
   dom.lightboxImage.alt = activeImage.alt || "Gallery image";
   dom.lightboxCaption.textContent = activeImage.alt || "";
   dom.lightboxCounter.textContent = `${state.currentLightboxPosition + 1} / ${state.availableLightboxItems.length}`;
+
+  if (dom.lightboxFlickrLink) {
+    const flickrUrl = flickrPageUrlFromSrc(activeImage.src);
+    dom.lightboxFlickrLink.href = flickrUrl || "#";
+  }
 }
 
 function clearUiHideTimer() {
