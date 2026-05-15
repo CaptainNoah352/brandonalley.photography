@@ -8,18 +8,31 @@
 const GALLERY_IMAGES = [
   {
     src: "https://live.staticflickr.com/65535/55268958145_c1c8cb087b_b.jpg",
-    alt: "Silver Springs",
+    alt: "Yellow-crowned Night-Heron",
     is_featured: true,
+    project: "herons",
+    species: "Nyctanassa violacea",
   },
   {
     src: "https://live.staticflickr.com/65535/55268957900_7aff49f7d3_b.jpg",
-    alt: "Silver Springs",
+    alt: "Little Blue Heron",
     is_featured: true,
+    project: "herons",
+    species: "Egretta caerulea",
   },
   {
     src: "https://live.staticflickr.com/65535/55267648392_f20c890bff_b.jpg",
-    alt: "Photography by Brandon Alley",
+    alt: "Great Blue Heron",
     is_featured: true,
+    project: "herons",
+    species: "Ardea herodias",
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55269065449_aafc10cc7a_b.jpg",
+    alt: "Snowy Egret",
+    is_featured: true,
+    project: "herons",
+    species: "Egretta thula",
   },
   {
     src: "https://live.staticflickr.com/65535/55250254275_f0fc9c0970_b.jpg",
