@@ -1140,14 +1140,17 @@ p {
   background: color-mix(in srgb, var(--color-accent) 5%, var(--bg-page));
 }
 
-.contact-card-label {
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  width: 5.5rem;
+.contact-card-icon {
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
+  width: 1.5rem;
+  color: var(--color-accent);
+}
+
+.contact-card-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .contact-card-value {
