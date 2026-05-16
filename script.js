@@ -1,3 +1,114 @@
+const SPECIES_DATA = {
+  "Ardea herodias": {
+    range: "Found throughout North America from southern Canada to Mexico and the Caribbean. A year-round resident across all of Florida.",
+    habitat: "Extremely adaptable — freshwater marshes, swamps, rivers, lakes, ponds, tidal flats, mangroves, and roadside ditches. Found wherever shallow water holds fish.",
+    diet: "Primarily fish, but opportunistically takes frogs, snakes, insects, small mammals, and occasionally other birds. Hunts by standing motionless or walking slowly, then striking with a lightning-fast spear of the bill.",
+    fieldMarks: "North America's largest heron at 38–54 in tall with a 6-ft wingspan. Blue-gray body, white head with a black stripe extending into a long black plume, yellowish bill. In flight, the neck folds into an S-curve.",
+    behavior: "Solitary forager. Nests colonially in tall trees (rookeries) often shared with egrets and cormorants. Gives a harsh, prehistoric 'frahnk' alarm call when flushed. Highly territorial at feeding sites.",
+    conservation: "Least Concern",
+    funFact: "A Great Blue Heron can strike prey in a fraction of a second — one of the fastest strikes in the animal kingdom relative to body size.",
+  },
+  "Ardea alba": {
+    range: "Found on every continent except Antarctica. Year-round throughout Florida, with large breeding colonies in the Everglades and central Florida lakes.",
+    habitat: "Freshwater and saltwater wetlands including marshes, ponds, rivers, tidal flats, swamps, and flooded fields.",
+    diet: "Fish, frogs, snakes, aquatic invertebrates, and small mammals. Wades slowly or stands still in shallow water before striking.",
+    fieldMarks: "All white plumage, yellow-orange bill, long black legs. About 38 in tall. During breeding season, develops spectacular lacy aigrette plumes extending beyond the tail and a bright green loral patch.",
+    behavior: "Defends feeding territories aggressively. Nests colonially in trees, frequently in mixed-species rookeries alongside herons and ibises.",
+    conservation: "Least Concern",
+    funFact: "The Great Egret's aigrette plumes were so coveted for hat fashion in the 1800s that the species was nearly hunted to extinction. Outrage over this slaughter helped spark the modern conservation movement and led to the founding of the Audubon Society.",
+  },
+  "Egretta thula": {
+    range: "From the eastern United States to South America. Common year-round resident in Florida, especially along the coasts.",
+    habitat: "Saltwater estuaries, tidal marshes, mangroves, freshwater ponds, swamps, and flooded fields.",
+    diet: "Fish, shrimp, crayfish, frogs, and insects. Uses a wide variety of active hunting techniques — shuffling feet to flush prey, running and lunging, spreading wings to attract fish with shade.",
+    fieldMarks: "All white, slender build, about 22–26 in tall. Black bill, yellow loral patch, and bright yellow feet on black legs — often called 'golden slippers.' Breeding plumage includes elaborate recurved plumes.",
+    behavior: "An energetic and active hunter compared to the patient Great Egret. Can be territorial and competitive at feeding sites. Nests colonially in shrubs or low trees, often with other species.",
+    conservation: "Least Concern",
+    funFact: "Snowy Egrets have been documented using bait — dropping feathers, insects, or other small objects onto the water surface, then snatching the small fish that come to investigate.",
+  },
+  "Egretta caerulea": {
+    range: "Eastern and Gulf Coast United States to South America. Year-round in Florida, with some northward dispersal by young birds in summer.",
+    habitat: "Freshwater ponds, swamps, marshes, rivers, and flooded fields; also coastal estuaries and mangroves.",
+    diet: "Fish, frogs, crayfish, insects, and other small aquatic animals. Forages slowly and deliberately, often at vegetation margins.",
+    fieldMarks: "Adults are slate-blue with a maroon-purple head and neck and a pale bluish bill with a dark tip. About 22–29 in. Juveniles are entirely white — easily confused with Snowy Egret but lacking yellow feet. Immatures pass through a distinctive pied (patchy blue-and-white) phase.",
+    behavior: "More solitary and secretive than many herons. Often forages in dense marsh vegetation. Nests in mixed colonies. The year-long presence of all three plumage stages makes this one of Florida's most visually variable herons.",
+    conservation: "Least Concern",
+    funFact: "White juvenile Little Blue Herons are tolerated by Snowy Egrets at feeding sites — an advantage that allows them to sneak into productive areas. Once they molt into adult plumage, they're treated as competitors and chased off.",
+  },
+  "Egretta tricolor": {
+    range: "Atlantic and Gulf coasts of North America, Central and South America, and the Caribbean. A year-round resident throughout Florida and one of the most common herons along the coast.",
+    habitat: "Primarily coastal — saltwater marshes, mangroves, tidal flats, and estuaries. Less common in freshwater habitats inland.",
+    diet: "Overwhelmingly fish, supplemented with frogs, lizards, and crustaceans. One of the most active hunters among Florida herons.",
+    fieldMarks: "Dark blue-gray head, neck, and back; white belly and stripe down the foreneck; rusty neck streaking. About 24–30 in with a long, slender neck. The white belly contrasting with the dark back is the key field mark in flight.",
+    behavior: "A highly animated, aggressive forager. Charges through shallow water, pivots rapidly, spreads wings, and lunges at prey — far more active than the patient Great Blue Heron. Nests in dense coastal colonies.",
+    conservation: "Least Concern",
+    funFact: "Despite being one of the smaller herons, the Tricolored Heron is one of Florida's most numerous wading birds — and one of the most entertaining to watch hunt.",
+  },
+  "Egretta rufescens": {
+    range: "Gulf Coast of the United States, Caribbean, Mexico, and Central America. In Florida, primarily found along the Gulf Coast, Tampa Bay, the Florida Keys, and the southern tip of the peninsula.",
+    habitat: "Shallow, open saltwater flats, mangrove lagoons, and coastal estuaries. Rarely ventures far from saltwater.",
+    diet: "Almost entirely fish. Targets shallow-water species using a spectacular and highly active hunting style unlike any other heron.",
+    fieldMarks: "Two color morphs: the dark morph has a slate-gray body with a shaggy reddish-brown head and neck; the rare white morph is all white. Both have a distinctive bicolored bill (pink base, dark tip) and blue-gray legs. About 27–32 in tall.",
+    behavior: "Famous for frantic 'canopy feeding' — dashing, lunging, spinning, and spreading wings like an umbrella over the water to reduce glare and startle fish into the open. No other Florida heron hunts quite like it.",
+    conservation: "Near Threatened",
+    funFact: "The Reddish Egret is one of the rarest herons in North America, with an estimated U.S. population of only 2,000–3,000 pairs. Florida's coastal flats are among the best places in the world to observe this species.",
+  },
+  "Bubulcus ibis": {
+    range: "Originally native to sub-Saharan Africa and southern Asia. Spread naturally to South America in the 1800s and reached North America by the 1940s. Now found worldwide; common year-round throughout Florida.",
+    habitat: "Dry fields, pastures, roadsides, and agricultural land — very unlike most herons. Follows cattle, horses, tractors, and lawn mowers to catch the insects they flush.",
+    diet: "Primarily grasshoppers and other large insects. Also takes frogs, small lizards, and occasionally nestlings. Studies show Cattle Egrets forage 50% more efficiently when following large animals.",
+    fieldMarks: "Compact, stocky, all-white egret. Non-breeding birds are pure white with a yellow bill and legs. Breeding adults develop buffy-orange plumes on the head, breast, and back; the bill and legs turn orange-red briefly at peak courtship.",
+    behavior: "Highly social — often seen in large flocks. Nests in dense colonies, frequently with other herons and ibises. One of the most successful colonizers in avian history; its global range expansion is still ongoing.",
+    conservation: "Least Concern",
+    funFact: "Cattle Egrets crossed the Atlantic from Africa to South America on their own in the late 19th century — no human help required. They reached Florida by the 1950s and have become one of the most familiar birds in the state.",
+  },
+  "Butorides virescens": {
+    range: "North and Central America and the Caribbean. Year-round in Florida, particularly common in wooded wetlands and along tree-lined waterways.",
+    habitat: "Forested wetlands, mangroves, stream banks, pond edges, and any wooded shoreline with dense overhanging vegetation. Prefers cover and avoids open water.",
+    diet: "Fish, frogs, crayfish, insects, and other small invertebrates. Hunts by perching motionless on a low branch or root just above the water and striking downward.",
+    fieldMarks: "Small and compact — Florida's smallest heron at 16–18 in. Deep greenish-black cap, chestnut neck, dark green-gray back, and short orange-yellow legs (may turn bright orange in breeding season). Often appears hunched at rest.",
+    behavior: "Secretive and solitary. When alarmed, stretches neck upward and flicks its tail. One of very few birds known to use tools.",
+    conservation: "Least Concern",
+    funFact: "Green Herons are among a tiny handful of bird species that use tools. They have been observed manufacturing lures from feathers, leaves, and even bread, then actively repositioning the lure if it drifts away from a good fishing spot.",
+  },
+  "Nycticorax nycticorax": {
+    range: "Found on every continent except Australia and Antarctica. Year-round in Florida, often roosting in large communal groups.",
+    habitat: "Freshwater marshes, swamps, mangroves, wooded wetlands, and coastal bays. Roosts and nests in dense vegetation, often in trees directly over water.",
+    diet: "Fish, frogs, aquatic invertebrates, insects, and occasionally eggs and chicks of other colonial waterbirds. Will also take small mammals and carrion.",
+    fieldMarks: "Stocky with a short neck and a large head. Black cap and back, gray wings, white underparts, red eyes. Two to three long white head plumes in breeding plumage. About 23–26 in. Juveniles are heavily streaked brown.",
+    behavior: "Primarily crepuscular and nocturnal — most active at dusk, dawn, and through the night. Roosts communally during the day. Call is a distinctive, barking 'quok' frequently heard near wetlands after dark.",
+    conservation: "Least Concern",
+    funFact: "Black-crowned Night-Herons have been documented stealing food from other herons, egrets, and even ducks. They have also been observed using bread as bait to catch fish — one of only a handful of herons known to fish with lures.",
+  },
+  "Nyctanassa violacea": {
+    range: "Eastern North America, the Caribbean, Central America, and parts of South America. Year-round in Florida, especially common in coastal and mangrove habitats.",
+    habitat: "Mangroves, coastal marshes, tidal flats, wooded swamps, and estuaries. More closely tied to saltwater and brackish environments than the Black-crowned Night-Heron.",
+    diet: "A specialist in crustaceans — primarily crabs, crayfish, and shrimp. Also takes fish, insects, frogs, and small vertebrates. Its heavier, more powerful bill is adapted for crushing hard-shelled prey.",
+    fieldMarks: "Gray body, bold black-and-white facial pattern, pale yellow crown stripe (brightest in breeding adults). Stocky like the Black-crowned, but with a longer neck, longer legs, and a heavier bill. About 21–28 in. Juveniles are dark brown with fine white streaking.",
+    behavior: "More crepuscular than fully nocturnal — often active through the day along mangrove edges. Typically more solitary than the Black-crowned. Nests in mangroves and coastal trees.",
+    conservation: "Least Concern",
+    funFact: "Yellow-crowned Night-Herons can expertly dismantle crabs — breaking off the claws and legs, crushing the carapace, and swallowing the pieces. They have been observed working on a single crab for several minutes before consuming it.",
+  },
+  "Ardea herodias occidentalis": {
+    range: "Found almost exclusively in the Florida Keys, Florida Bay, and the coastal mangroves of extreme southern Florida — the most geographically restricted heron in North America. Rarely wanders to the Gulf Coast or the Dry Tortugas.",
+    habitat: "Open saltwater bays, tidal flats, mangrove shorelines, and shallow coastal waters. Almost never found in freshwater environments.",
+    diet: "Primarily large fish. Hunts with the same patient, stand-and-wait style as the Great Blue Heron, but almost exclusively in marine environments.",
+    fieldMarks: "All white plumage and the same massive size as the Great Blue Heron (38–54 in, 6-ft wingspan) — making it the largest all-white heron in Florida. Yellow bill, pale yellow legs. Lacks the dark legs of the Great Egret.",
+    behavior: "Generally less wary than Great Blue Herons and may allow a close approach. Tends to be solitary. Often seen wading on expansive open tidal flats. Most taxonomists treat it as a white color morph of Ardea herodias rather than a full species.",
+    conservation: "Special Concern (Florida)",
+    funFact: "The Great White Heron is not an albino — it is a genetically distinct white morph found only in the hyper-saline environments of extreme South Florida. It occasionally interbreeds with the Great Blue Heron, producing a rare intermediate form called the 'Würdemann's Heron.'",
+  },
+  "Ixobrychus exilis": {
+    range: "Eastern and central North America, Central America, and parts of South America. Year-round in Florida, though easily overlooked due to its secretive habits.",
+    habitat: "Dense freshwater marshes dominated by tall emergent vegetation — cattails, bulrushes, and giant reed. Requires thick stands of reeds for cover and almost never ventures into the open.",
+    diet: "Primarily small fish, frogs, and insects. Hunts by perching on reed stems directly above the water and striking downward.",
+    fieldMarks: "North America's smallest heron at just 11–14 in — barely larger than a Red-winged Blackbird. Buff underparts, chestnut neck, large pale buff wing patches. Males have a black cap and back; females are streaked brown. Greenish-yellow bill and legs.",
+    behavior: "Extraordinarily secretive. Climbs through reeds using its large grasping feet. When alarmed, freezes with bill pointed skyward, blending perfectly into the stems. Far more often heard (a low cooing call) than seen.",
+    conservation: "Least Concern",
+    funFact: "Least Bitterns can compress their bodies to fit through gaps between reed stems that seem impossibly narrow. This 'reed-walking' ability, gripping two stems simultaneously and inching between them, is unique among North American herons.",
+  },
+};
+
 // Edit these to add or change photos.
 // Duplicate an entry to add a photo. Remove an entry to remove it.
 // - src:         full image URL
@@ -128,6 +239,15 @@ const dom = {
   lightboxFigure: document.getElementById("lightboxFigure"),
   lightboxFlickrLink: document.getElementById("lightboxFlickrLink"),
   projectGallery: document.getElementById("project-gallery"),
+  speciesModal: document.getElementById("speciesModal"),
+  speciesModalBackdrop: document.getElementById("speciesModalBackdrop"),
+  speciesModalClose: document.getElementById("speciesModalClose"),
+  speciesModalTitle: document.getElementById("speciesModalTitle"),
+  speciesModalScientific: document.getElementById("speciesModalScientific"),
+  speciesModalConservation: document.getElementById("speciesModalConservation"),
+  speciesModalDocumented: document.getElementById("speciesModalDocumented"),
+  speciesModalDetails: document.getElementById("speciesModalDetails"),
+  speciesModalPhotoWrap: document.getElementById("speciesModalPhotoWrap"),
 };
 
 const state = {
@@ -139,6 +259,7 @@ const state = {
   touchStartX: 0,
   touchStartY: 0,
   hasAlignedInitialHash: false,
+  speciesModalOpener: null,
 };
 
 const CONTROL_HIDE_DELAY_MS = 1500;
@@ -513,6 +634,111 @@ function renderProjectGallery(projectSlug) {
   hydrateSpeciesCards();
 }
 
+function openSpeciesModal(scientificName, openerEl) {
+  const data = SPECIES_DATA[scientificName];
+  if (!data || !dom.speciesModal) return;
+
+  state.speciesModalOpener = openerEl || null;
+
+  const commonName = openerEl
+    ? (openerEl.querySelector(".species-common")?.textContent || scientificName)
+    : scientificName;
+
+  if (dom.speciesModalTitle) dom.speciesModalTitle.textContent = commonName;
+  if (dom.speciesModalScientific) dom.speciesModalScientific.textContent = scientificName;
+
+  if (dom.speciesModalConservation) {
+    dom.speciesModalConservation.textContent = data.conservation;
+    dom.speciesModalConservation.dataset.status = data.conservation
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[()]/g, "");
+  }
+
+  const matchingImgNode = dom.projectGallery
+    ? Array.from(dom.projectGallery.querySelectorAll(".gallery-item img[data-species]")).find(
+        (img) => img.dataset.species === scientificName && img.dataset.broken !== "true" && img.complete && img.naturalWidth
+      )
+    : null;
+
+  if (dom.speciesModalDocumented) {
+    dom.speciesModalDocumented.textContent = matchingImgNode ? "Documented" : "Not yet photographed";
+    dom.speciesModalDocumented.dataset.state = matchingImgNode ? "documented" : "pending";
+  }
+
+  if (dom.speciesModalPhotoWrap) {
+    dom.speciesModalPhotoWrap.innerHTML = "";
+    if (matchingImgNode) {
+      const img = document.createElement("img");
+      img.src = matchingImgNode.src;
+      img.alt = commonName;
+      img.className = "species-modal-photo";
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "species-modal-view-btn";
+      btn.textContent = "View photo →";
+      btn.addEventListener("click", () => {
+        closeSpeciesModal();
+        openLightboxByImageNode(matchingImgNode);
+      });
+      dom.speciesModalPhotoWrap.appendChild(img);
+      dom.speciesModalPhotoWrap.appendChild(btn);
+    }
+  }
+
+  if (dom.speciesModalDetails) {
+    const fields = [
+      { label: "Range", value: data.range },
+      { label: "Habitat", value: data.habitat },
+      { label: "Diet", value: data.diet },
+      { label: "Field marks", value: data.fieldMarks },
+      { label: "Behavior", value: data.behavior },
+      { label: "Did you know", value: data.funFact },
+    ];
+    dom.speciesModalDetails.innerHTML = fields
+      .map(({ label, value }) => `<dt>${label}</dt><dd>${value}</dd>`)
+      .join("");
+  }
+
+  dom.speciesModal.classList.add("open");
+  dom.speciesModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+
+  const focusTarget = dom.speciesModalClose;
+  if (focusTarget) requestAnimationFrame(() => focusTarget.focus());
+}
+
+function closeSpeciesModal() {
+  if (!dom.speciesModal) return;
+  dom.speciesModal.classList.remove("open");
+  dom.speciesModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  if (state.speciesModalOpener) {
+    state.speciesModalOpener.focus();
+    state.speciesModalOpener = null;
+  }
+}
+
+function initSpeciesCardClicks() {
+  document.querySelectorAll(".species-card[data-species]").forEach((card) => {
+    if (card.dataset.modalWired) return;
+    card.dataset.modalWired = "true";
+    card.setAttribute("role", "button");
+    card.setAttribute("tabindex", "0");
+    card.style.cursor = "pointer";
+    card.addEventListener("click", (e) => {
+      if (e.target.closest(".species-thumb")) return;
+      openSpeciesModal(card.dataset.species, card);
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openSpeciesModal(card.dataset.species, card);
+      }
+    });
+  });
+}
+
 function hydrateSpeciesCards() {
   if (!dom.projectGallery) return;
   const cards = document.querySelectorAll(".species-card[data-species]");
@@ -542,9 +768,11 @@ function hydrateSpeciesCards() {
     thumb.loading = "lazy";
     thumb.decoding = "async";
     thumb.setAttribute("aria-hidden", "true");
+    thumb.title = "View photo";
     card.insertBefore(thumb, card.querySelector(".species-status-dot"));
 
-    card.addEventListener("click", () => {
+    thumb.addEventListener("click", (e) => {
+      e.stopPropagation();
       openLightboxByImageNode(matchingImg);
     });
   });
@@ -579,6 +807,7 @@ function renderCurrentPageGallery() {
   if (pageType === "projects") {
     renderProjectGallery("herons");
     updateProjectProgress("herons", 12);
+    initSpeciesCardClicks();
     return;
   }
 
@@ -623,6 +852,9 @@ function bindGlobalEvents() {
       first.focus();
     }
   });
+
+  dom.speciesModalClose?.addEventListener("click", closeSpeciesModal);
+  dom.speciesModalBackdrop?.addEventListener("click", closeSpeciesModal);
 
   dom.lightboxClose?.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -669,6 +901,10 @@ function bindGlobalEvents() {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && isMobileMenuOpen()) {
       setMobileMenuOpen(false);
+      return;
+    }
+    if (event.key === "Escape" && dom.speciesModal?.classList.contains("open")) {
+      closeSpeciesModal();
       return;
     }
     if (!dom.lightbox?.classList.contains("open")) return;

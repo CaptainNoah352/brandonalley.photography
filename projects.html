@@ -86,7 +86,7 @@
             <div class="project-card-header">
               <div class="project-card-meta">
                 <span class="project-status project-status--active">In Progress</span>
-                <span class="project-year">2025 &ndash; ongoing</span>
+                <span class="project-year">2026 &ndash; ongoing</span>
               </div>
               <h2 id="project-herons-title" class="project-card-title">Herons of Florida</h2>
               <p class="project-card-desc">Florida is home to eleven species of herons and egrets — birds that share the same ancient family but each occupy their own corner of the wetlands. This project is a slow, deliberate effort to photograph every one of them in the wild and create a detailed infographic for each species: range, behavior, field marks, and the story behind the encounter.</p>
@@ -223,6 +223,25 @@
           </a>
         </figcaption>
       </figure>
+    </div>
+
+    <div class="species-modal" id="speciesModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="speciesModalTitle">
+      <div class="species-modal-backdrop" id="speciesModalBackdrop"></div>
+      <div class="species-modal-panel">
+        <button class="species-modal-close" id="speciesModalClose" type="button" aria-label="Close species details">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="species-modal-photo-wrap" id="speciesModalPhotoWrap"></div>
+        <div class="species-modal-body">
+          <p class="species-modal-scientific" id="speciesModalScientific"></p>
+          <h2 class="species-modal-title" id="speciesModalTitle"></h2>
+          <div class="species-modal-badges">
+            <span class="species-modal-conservation" id="speciesModalConservation"></span>
+            <span class="species-modal-documented" id="speciesModalDocumented"></span>
+          </div>
+          <dl class="species-modal-details" id="speciesModalDetails"></dl>
+        </div>
+      </div>
     </div>
 
     <script src="script.js"></script>
