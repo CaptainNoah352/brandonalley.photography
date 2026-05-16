@@ -18,7 +18,7 @@ const SPECIES_DATA = {
     funFact: "The Great Egret's aigrette plumes were so coveted for hat fashion in the 1800s that the species was nearly hunted to extinction. Outrage over this slaughter helped spark the modern conservation movement and led to the founding of the Audubon Society.",
   },
   "Egretta thula": {
-    range: "From the eastern United States to South America. Common year-round resident in Florida, especially along the coasts.",
+    range: "Throughout North and South America — from southern Canada to Argentina, breeding along both the Atlantic and Pacific coasts of the United States. Common year-round resident in Florida, especially along the coasts.",
     habitat: "Saltwater estuaries, tidal marshes, mangroves, freshwater ponds, swamps, and flooded fields.",
     diet: "Fish, shrimp, crayfish, frogs, and insects. Uses a wide variety of active hunting techniques — shuffling feet to flush prey, running and lunging, spreading wings to attract fish with shade.",
     fieldMarks: "All white, slender build, about 22–26 in tall. Black bill, yellow loral patch, and bright yellow feet on black legs — often called 'golden slippers.' Breeding plumage includes elaborate recurved plumes.",
@@ -51,7 +51,7 @@ const SPECIES_DATA = {
     fieldMarks: "Two color morphs: the dark morph has a slate-gray body with a shaggy reddish-brown head and neck; the rare white morph is all white. Both have a distinctive bicolored bill (pink base, dark tip) and blue-gray legs. About 27–32 in tall.",
     behavior: "Famous for frantic 'canopy feeding' — dashing, lunging, spinning, and spreading wings like an umbrella over the water to reduce glare and startle fish into the open. No other Florida heron hunts quite like it.",
     conservation: "Near Threatened",
-    funFact: "The Reddish Egret is one of the rarest herons in North America, with an estimated U.S. population of only 2,000–3,000 pairs. Florida's coastal flats are among the best places in the world to observe this species.",
+    funFact: "The Reddish Egret is one of the rarest herons in North America, with fewer than 2,000 nesting pairs in the United States. Florida's coastal flats are among the best places in the world to observe this species.",
   },
   "Bubulcus ibis": {
     range: "Originally native to sub-Saharan Africa and southern Asia. Spread naturally to South America in the 1800s and reached North America by the 1940s. Now found worldwide; common year-round throughout Florida.",
@@ -66,7 +66,7 @@ const SPECIES_DATA = {
     range: "North and Central America and the Caribbean. Year-round in Florida, particularly common in wooded wetlands and along tree-lined waterways.",
     habitat: "Forested wetlands, mangroves, stream banks, pond edges, and any wooded shoreline with dense overhanging vegetation. Prefers cover and avoids open water.",
     diet: "Fish, frogs, crayfish, insects, and other small invertebrates. Hunts by perching motionless on a low branch or root just above the water and striking downward.",
-    fieldMarks: "Small and compact — Florida's smallest heron at 16–18 in. Deep greenish-black cap, chestnut neck, dark green-gray back, and short orange-yellow legs (may turn bright orange in breeding season). Often appears hunched at rest.",
+    fieldMarks: "Small and compact at 16–18 in. Deep greenish-black cap, chestnut neck, dark green-gray back, and short orange-yellow legs (may turn bright orange in breeding season). Often appears hunched at rest.",
     behavior: "Secretive and solitary. When alarmed, stretches neck upward and flicks its tail. One of very few birds known to use tools.",
     conservation: "Least Concern",
     funFact: "Green Herons are among a tiny handful of bird species that use tools. They have been observed manufacturing lures from feathers, leaves, and even bread, then actively repositioning the lure if it drifts away from a good fishing spot.",
