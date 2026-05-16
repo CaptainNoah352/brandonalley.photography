@@ -1914,30 +1914,46 @@ p {
   color: var(--color-text);
 }
 
+.species-modal-header-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.species-modal-name-col {
+  flex: 1;
+  min-width: 0;
+}
+
 .species-modal-photo-wrap {
   position: relative;
-  width: 100%;
-  clear: both;
+  flex-shrink: 0;
+  width: 110px;
 }
 
 .species-modal-photo {
   display: block;
-  width: 100%;
+  width: 110px;
+  height: 145px;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 .species-modal-view-btn {
   display: block;
-  width: 100%;
-  padding: 0.55rem 1.2rem;
+  width: 110px;
+  padding: 0.35rem 0.5rem;
   background: var(--footer-bg);
   color: var(--footer-text);
   border: none;
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   letter-spacing: 0.04em;
-  text-align: right;
+  text-align: center;
   cursor: pointer;
   transition: background 0.15s ease;
+  border-radius: 0 0 4px 4px;
+  margin-top: -2px;
 }
 
 .species-modal-view-btn:hover {
@@ -1957,7 +1973,7 @@ p {
 }
 
 .species-modal-title {
-  margin: 0 0 0.9rem;
+  margin: 0 0 0.7rem;
   font-family: var(--font-heading);
   font-size: clamp(1.4rem, 3vw, 1.8rem);
   font-weight: 600;
@@ -1970,7 +1986,11 @@ p {
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-bottom: 1.4rem;
+  margin-bottom: 0;
+}
+
+.species-modal-header-row + .species-modal-details {
+  margin-top: 1.4rem;
 }
 
 .species-modal-conservation,
