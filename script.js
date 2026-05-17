@@ -118,6 +118,46 @@ const SPECIES_DATA = {
 // - species:     scientific name, e.g. "Ardea herodias" — links photo to species card
 const GALLERY_IMAGES = [
   {
+    src: "https://live.staticflickr.com/65535/55275393790_e70c958e89_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55274997711_a476e4b222_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55275129113_70d94a57ca_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55275393450_ec5b55797a_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55274080112_6213a4d98d_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55275128673_79dac08b00_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55250254275_f0fc9c0970_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    src: "https://live.staticflickr.com/65535/55174862805_526015f4ef_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
     src: "https://live.staticflickr.com/65535/55268958145_c1c8cb087b_b.jpg",
     alt: "Yellow-crowned Night-Heron",
     is_featured: true,
