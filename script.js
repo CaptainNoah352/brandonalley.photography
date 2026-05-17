@@ -139,8 +139,10 @@ const GALLERY_IMAGES = [
   },
   {
     src: "https://live.staticflickr.com/65535/55274080112_6213a4d98d_b.jpg",
-    alt: "Photography by Brandon Alley",
+    alt: "Yellow-crowned Night-Heron",
     is_featured: true,
+    project: "herons",
+    species: "Nyctanassa violacea",
   },
   {
     src: "https://live.staticflickr.com/65535/55275128673_79dac08b00_b.jpg",
@@ -166,10 +168,10 @@ const GALLERY_IMAGES = [
   },
   {
     src: "https://live.staticflickr.com/65535/55268957900_7aff49f7d3_b.jpg",
-    alt: "Yellow-crowned Night-Heron",
+    alt: "Little Blue Heron",
     is_featured: true,
     project: "herons",
-    species: "Nyctanassa violacea",
+    species: "Egretta caerulea",
   },
   {
     src: "https://live.staticflickr.com/65535/55267648392_f20c890bff_b.jpg",
@@ -186,7 +188,7 @@ const GALLERY_IMAGES = [
     species: "Egretta thula",
   },
   {
-    src: "https://live.staticflickr.com/65535/55249900291_75c53ab3e9_b.jpg",
+    src: "https://live.staticflickr.com/65535/55249900291_eb9c82c3df_b.jpg",
     alt: "Great Egret",
     is_featured: true,
     project: "herons",
