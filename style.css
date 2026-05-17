@@ -1939,6 +1939,11 @@ p {
   border-radius: 4px;
 }
 
+.species-modal-photo--landscape {
+  height: auto;
+  object-fit: contain;
+}
+
 .species-modal-view-btn {
   display: block;
   width: 110px;
