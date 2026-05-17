@@ -166,10 +166,10 @@ const GALLERY_IMAGES = [
   },
   {
     src: "https://live.staticflickr.com/65535/55268957900_7aff49f7d3_b.jpg",
-    alt: "Little Blue Heron",
+    alt: "Yellow-crowned Night-Heron",
     is_featured: true,
     project: "herons",
-    species: "Egretta caerulea",
+    species: "Nyctanassa violacea",
   },
   {
     src: "https://live.staticflickr.com/65535/55267648392_f20c890bff_b.jpg",
