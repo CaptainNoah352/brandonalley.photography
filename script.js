@@ -673,6 +673,9 @@ function openSpeciesModal(scientificName, openerEl) {
       img.src = matchingImgNode.src;
       img.alt = commonName;
       img.className = "species-modal-photo";
+      if (matchingImgNode.naturalWidth > matchingImgNode.naturalHeight) {
+        img.classList.add("species-modal-photo--landscape");
+      }
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "species-modal-view-btn";
