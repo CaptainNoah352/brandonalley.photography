@@ -1,4 +1,4 @@
-const SPECIES_DATA = {
+var SPECIES_DATA = {
   "Ardea herodias": {
     range: "Found throughout North America from southern Canada to Mexico and the Caribbean. A year-round resident across all of Florida.",
     habitat: "Extremely adaptable — freshwater marshes, swamps, rivers, lakes, ponds, tidal flats, mangroves, and roadside ditches. Found wherever shallow water holds fish.",
@@ -117,7 +117,7 @@ const SPECIES_DATA = {
 // - is_featured: true = shows in the homepage carousel
 // - project:     project slug, e.g. "herons" — adds photo to that project gallery
 // - species:     scientific name, e.g. "Ardea herodias" — links photo to species card
-const GALLERY_IMAGES = [
+var GALLERY_IMAGES = [
   {
     id: 1,
     src: "https://live.staticflickr.com/65535/55275393790_e70c958e89_b.jpg",
