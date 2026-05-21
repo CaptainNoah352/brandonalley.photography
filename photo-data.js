@@ -282,4 +282,28 @@ var GALLERY_IMAGES = [
     alt: "Photography by Brandon Alley",
     is_featured: true,
   },
+  {
+    id: 26,
+    src: "https://live.staticflickr.com/65535/55283597631_8baf6451e3_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    id: 27,
+    src: "https://live.staticflickr.com/65535/55282678262_b9e76f6883_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    id: 28,
+    src: "https://live.staticflickr.com/65535/55283738983_c5ba4ef8dd_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
+  {
+    id: 29,
+    src: "https://live.staticflickr.com/65535/55284001095_b95ecfb0ac_b.jpg",
+    alt: "Photography by Brandon Alley",
+    is_featured: true,
+  },
 ];
