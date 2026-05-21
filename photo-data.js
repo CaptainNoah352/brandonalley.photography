@@ -285,14 +285,18 @@ var GALLERY_IMAGES = [
   {
     id: 26,
     src: "https://live.staticflickr.com/65535/55283597631_8baf6451e3_b.jpg",
-    alt: "Photography by Brandon Alley",
+    alt: "Great Blue Heron",
     is_featured: true,
+    project: "herons",
+    species: "Ardea herodias",
   },
   {
     id: 27,
     src: "https://live.staticflickr.com/65535/55282678262_b9e76f6883_b.jpg",
-    alt: "Photography by Brandon Alley",
+    alt: "Black-crowned Night-Heron",
     is_featured: true,
+    project: "herons",
+    species: "Nycticorax nycticorax",
   },
   {
     id: 28,
@@ -303,7 +307,9 @@ var GALLERY_IMAGES = [
   {
     id: 29,
     src: "https://live.staticflickr.com/65535/55284001095_b95ecfb0ac_b.jpg",
-    alt: "Photography by Brandon Alley",
+    alt: "Green Heron",
     is_featured: true,
+    project: "herons",
+    species: "Butorides virescens",
   },
 ];
