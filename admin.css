@@ -264,6 +264,22 @@ body {
   outline-offset: 2px;
 }
 
+/* ── Empty / error state ── */
+.admin-empty {
+  grid-column: 1 / -1;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--a-muted);
+  font-size: 0.92rem;
+}
+
+.admin-empty code {
+  font-family: var(--a-mono);
+  font-size: 0.9em;
+  background: rgba(196, 82, 42, 0.08);
+  padding: 0.1em 0.3em;
+}
+
 /* ── Footer ── */
 .admin-footer {
   background: var(--a-controls-bg);

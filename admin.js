@@ -7,7 +7,7 @@
 
   function buildProjectFilter() {
     const select = document.getElementById('filterProject');
-    if (!select || !window.GALLERY_IMAGES) return;
+    if (!select || typeof GALLERY_IMAGES === 'undefined') return;
 
     const projects = [...new Set(GALLERY_IMAGES.map(function (p) { return p.project || ''; }))].sort();
     projects.forEach(function (proj) {
@@ -24,14 +24,23 @@
       html += '<span class="admin-badge admin-badge--featured">Featured</span>';
     }
     if (photo.project) {
-      html += '<span class="admin-badge admin-badge--project">' + photo.project + '</span>';
+      html += '<span class="admin-badge admin-badge--project">' + escapeHtml(photo.project) + '</span>';
     }
     return html;
   }
 
   function renderCards() {
     var grid = document.getElementById('adminGrid');
-    if (!grid || !window.GALLERY_IMAGES) return;
+    if (!grid) return;
+
+    if (typeof GALLERY_IMAGES === 'undefined' || !GALLERY_IMAGES.length) {
+      grid.innerHTML =
+        '<p class="admin-empty">Photo data not loaded — check that ' +
+        '<code>photo-data.js</code> is present and contains a valid ' +
+        '<code>GALLERY_IMAGES</code> array.</p>';
+      updateCount();
+      return;
+    }
 
     GALLERY_IMAGES.forEach(function (photo) {
       var article = document.createElement('article');
