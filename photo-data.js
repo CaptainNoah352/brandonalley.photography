@@ -117,6 +117,19 @@ var SPECIES_DATA = {
 // - is_featured: true = shows in the homepage carousel
 // - project:     project slug, e.g. "herons" — adds photo to that project gallery
 // - species:     scientific name, e.g. "Ardea herodias" — links photo to species card
+// - location:    location slug, e.g. "sweetwater-wetland-preserve" — adds photo to a place gallery
+var LOCATIONS_DATA = [
+  {
+    slug: "sweetwater-wetland-preserve",
+    name: "Sweetwater Wetland Preserve",
+    region: "Gainesville, Florida",
+    status: "First location",
+    summary: "A continuing collection from the boardwalks, marsh edges, and open water at Sweetwater Wetland Preserve.",
+    description: "A place-based gallery for photographs made while walking Sweetwater Wetland Preserve in Gainesville — wetland birds, quiet habitat details, and the patient scenes that unfold between the reeds.",
+    coverImageId: 11,
+  },
+];
+
 var GALLERY_IMAGES = [
   {
     id: 1,
@@ -148,6 +161,7 @@ var GALLERY_IMAGES = [
     alt: "Yellow-crowned Night-Heron",
     is_featured: true,
     project: "herons",
+    location: "sweetwater-wetland-preserve",
     species: "Nyctanassa violacea",
   },
   {
@@ -174,6 +188,7 @@ var GALLERY_IMAGES = [
     alt: "Yellow-crowned Night-Heron",
     is_featured: true,
     project: "herons",
+    location: "sweetwater-wetland-preserve",
     species: "Nyctanassa violacea",
   },
   {
@@ -182,6 +197,7 @@ var GALLERY_IMAGES = [
     alt: "Little Blue Heron",
     is_featured: true,
     project: "herons",
+    location: "sweetwater-wetland-preserve",
     species: "Egretta caerulea",
   },
   {
@@ -190,6 +206,7 @@ var GALLERY_IMAGES = [
     alt: "Great Blue Heron",
     is_featured: true,
     project: "herons",
+    location: "sweetwater-wetland-preserve",
     species: "Ardea herodias",
   },
   {
@@ -198,6 +215,7 @@ var GALLERY_IMAGES = [
     alt: "Snowy Egret",
     is_featured: true,
     project: "herons",
+    location: "sweetwater-wetland-preserve",
     species: "Egretta thula",
   },
   {
@@ -206,6 +224,7 @@ var GALLERY_IMAGES = [
     alt: "Great Egret",
     is_featured: true,
     project: "herons",
+    location: "sweetwater-wetland-preserve",
     species: "Ardea alba",
   },
   {
@@ -288,6 +307,7 @@ var GALLERY_IMAGES = [
     alt: "Great Blue Heron",
     is_featured: true,
     project: "herons",
+    location: "sweetwater-wetland-preserve",
     species: "Ardea herodias",
   },
   {
@@ -296,6 +316,7 @@ var GALLERY_IMAGES = [
     alt: "Black-crowned Night-Heron",
     is_featured: true,
     project: "herons",
+    location: "sweetwater-wetland-preserve",
     species: "Nycticorax nycticorax",
   },
   {
@@ -310,6 +331,7 @@ var GALLERY_IMAGES = [
     alt: "Green Heron",
     is_featured: true,
     project: "herons",
+    location: "sweetwater-wetland-preserve",
     species: "Butorides virescens",
   },
 ];
