@@ -29,7 +29,7 @@
   --nav-icon: var(--footer-text);
   --header-border: rgba(184, 206, 160, 0.28);
   --logo-text: var(--footer-text);
-  --overlay-bg: rgba(238, 228, 210, 0.90);
+  --overlay-bg: var(--header-bg);
   --menu-close-color: var(--color-primary);
   --mobile-nav-text: color-mix(in srgb, var(--color-primary) 82%, #111111 18%);
   --gallery-hover-shadow: 0 16px 28px rgba(196, 82, 42, 0.22);
