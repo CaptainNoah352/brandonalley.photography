@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(rm -f admin.html admin.js admin.css supabase-config.js supabase.js)",
-      "Bash(rm -rf supabase/)",
-      "WebFetch(domain:www.flickr.com)"
-    ]
-  }
-}
