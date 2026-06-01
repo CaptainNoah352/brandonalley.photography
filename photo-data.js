@@ -434,7 +434,6 @@ var GALLERY_IMAGES = [
     src: "https://live.staticflickr.com/65535/55283878123_1fe399caf3_b.jpg",
     alt: "Photography by Brandon Alley",
     is_featured: true,
-    location: "sweetwater-wetland-preserve",
   },
 ];
 
