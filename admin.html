@@ -26,6 +26,11 @@
         <option value="all">All projects</option>
       </select>
 
+      <label class="admin-filter-label" for="filterLocation">Location</label>
+      <select id="filterLocation" class="admin-select">
+        <option value="all">All locations</option>
+      </select>
+
       <label class="admin-filter-label" for="filterFeatured">Featured</label>
       <select id="filterFeatured" class="admin-select">
         <option value="all">All photos</option>
@@ -40,12 +45,46 @@
       <div class="admin-grid" id="adminGrid"></div>
     </main>
 
+    <aside class="admin-prompt-panel" aria-label="Codex prompt maker">
+      <div class="admin-prompt-header">
+        <div>
+          <p class="admin-prompt-eyebrow">Codex prompt maker</p>
+          <h2>Photo groups</h2>
+        </div>
+        <span class="admin-prompt-count" id="promptCount">0 selected</span>
+      </div>
+
+      <div class="admin-prompt-groups" id="promptGroups"></div>
+
+      <div class="admin-prompt-actions">
+        <button class="admin-copy-btn" type="button" id="addPromptGroup">Add location group</button>
+        <button class="admin-copy-btn" type="button" id="clearPromptGroups">Clear</button>
+      </div>
+
+      <textarea class="admin-prompt-text" id="promptText" readonly aria-label="Generated Codex prompt"></textarea>
+
+      <div class="admin-prompt-actions">
+        <button class="admin-copy-btn" type="button" id="copyPromptGroup">Copy prompt</button>
+      </div>
+    </aside>
+
     <footer class="admin-footer">
-      <p>To update a photo, tell Claude: <strong>"Update photo #[number]: [what to change]"</strong></p>
-      <p>Photo data lives in <code>photo-data.js</code>. The admin panel is read-only.</p>
+      <p>Use the prompt maker to group photos by destination, then send the copied prompt to Codex.</p>
+      <p>Photo data lives in <code>photo-data.js</code>. The admin panel is a visual reference and prompt builder.</p>
     </footer>
 
-    <script src="photo-data.js"></script>
-    <script src="admin.js"></script>
+    <script>
+      (function () {
+        var cacheBust = Date.now();
+        var dataScript = document.createElement("script");
+        dataScript.src = "photo-data.js?v=" + cacheBust;
+        dataScript.onload = function () {
+          var adminScript = document.createElement("script");
+          adminScript.src = "admin.js?v=" + cacheBust;
+          document.body.appendChild(adminScript);
+        };
+        document.body.appendChild(dataScript);
+      }());
+    </script>
   </body>
 </html>
