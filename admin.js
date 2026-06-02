@@ -157,10 +157,6 @@
     return badges.join('');
   }
 
-  function buildCardPrompt(photo) {
-    return 'Update photo #' + photo.id + ': ';
-  }
-
   function renderCards() {
     var grid = document.getElementById('adminGrid');
     if (!grid) return;
@@ -216,7 +212,6 @@
             '<code class="admin-url-text">' + escapeHtml(photo.src) + '</code>' +
             '<div class="admin-url-actions">' +
               '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(String(photo.id)) + '">Copy #</button>' +
-              '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(buildCardPrompt(photo)) + '">Copy prompt</button>' +
               (flickrUrl ? '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(flickrUrl) + '">Copy Flickr</button>' : '') +
             '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(photo.src) + '">Copy image URL</button>' +
             '</div>' +
