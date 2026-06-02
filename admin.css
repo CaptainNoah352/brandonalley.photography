@@ -516,6 +516,11 @@ body {
   text-decoration: underline;
 }
 
+.admin-prompt-fields {
+  display: grid;
+  gap: 0.45rem;
+}
+
 .admin-prompt-field {
   display: grid;
   gap: 0.25rem;
