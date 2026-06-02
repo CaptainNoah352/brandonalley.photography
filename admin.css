@@ -84,6 +84,23 @@ body {
   color: var(--a-muted);
 }
 
+.admin-control-link {
+  border: 1px solid rgba(196, 82, 42, 0.3);
+  color: var(--a-terracotta);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.55rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.admin-control-link:hover,
+.admin-control-link:focus {
+  background: var(--a-terracotta);
+  color: #fff;
+  outline: none;
+}
+
 .admin-select {
   font-family: var(--a-font);
   font-size: 0.82rem;

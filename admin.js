@@ -245,11 +245,13 @@
     var grid = document.getElementById('adminGrid');
     var aboutGrid = document.getElementById('adminAboutGrid');
     var aboutSection = document.getElementById('aboutPhotoSection');
-    if (!grid) return;
+    if (!grid && !aboutGrid) return;
+    if (grid) grid.innerHTML = '';
     if (aboutGrid) aboutGrid.innerHTML = '';
 
     if (typeof GALLERY_IMAGES === 'undefined' || !GALLERY_IMAGES.length) {
-      grid.innerHTML =
+      var emptyTarget = grid || aboutGrid;
+      emptyTarget.innerHTML =
         '<p class="admin-empty">Photo data not loaded - check that ' +
         '<code>photo-data.js</code> is present and contains a valid ' +
         '<code>GALLERY_IMAGES</code> array.</p>';
@@ -262,6 +264,7 @@
         aboutGrid.appendChild(buildPhotoCard(photo, { special: true }));
         return;
       }
+      if (photo.usage === 'about' || !grid) return;
       grid.appendChild(buildPhotoCard(photo));
     });
 
@@ -286,6 +289,14 @@
   }
 
   function updateCount() {
+    var aboutOnlyGrid = !document.getElementById('adminGrid') && document.getElementById('adminAboutGrid');
+    if (aboutOnlyGrid) {
+      var aboutTotal = document.querySelectorAll('#adminAboutGrid .admin-card').length;
+      var aboutEl = document.getElementById('adminCount');
+      if (aboutEl) aboutEl.textContent = aboutTotal ? 'Showing About me photo' : 'No About me photo found';
+      return;
+    }
+
     var total = document.querySelectorAll('#adminGrid .admin-card').length;
     var visible = document.querySelectorAll('#adminGrid .admin-card:not([hidden])').length;
     var el = document.getElementById('adminCount');
