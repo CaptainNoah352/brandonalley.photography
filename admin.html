@@ -51,20 +51,25 @@
           <p class="admin-prompt-eyebrow">Codex prompt maker</p>
           <h2>Photo groups</h2>
         </div>
-        <span class="admin-prompt-count" id="promptCount">0 selected</span>
+        <div class="admin-prompt-header-actions">
+          <span class="admin-prompt-count" id="promptCount">0 selected</span>
+          <button class="admin-prompt-minimize" type="button" id="togglePromptPanel" aria-expanded="true">Minimize</button>
+        </div>
       </div>
 
-      <div class="admin-prompt-groups" id="promptGroups"></div>
+      <div class="admin-prompt-body" id="promptPanelBody">
+        <div class="admin-prompt-groups" id="promptGroups"></div>
 
-      <div class="admin-prompt-actions">
-        <button class="admin-copy-btn" type="button" id="addPromptGroup">Add location group</button>
-        <button class="admin-copy-btn" type="button" id="clearPromptGroups">Clear</button>
-      </div>
+        <div class="admin-prompt-actions">
+          <button class="admin-copy-btn" type="button" id="addPromptGroup">Add location group</button>
+          <button class="admin-copy-btn" type="button" id="clearPromptGroups">Clear</button>
+        </div>
 
-      <textarea class="admin-prompt-text" id="promptText" readonly aria-label="Generated Codex prompt"></textarea>
+        <textarea class="admin-prompt-text" id="promptText" readonly aria-label="Generated Codex prompt"></textarea>
 
-      <div class="admin-prompt-actions">
-        <button class="admin-copy-btn" type="button" id="copyPromptGroup">Copy prompt</button>
+        <div class="admin-prompt-actions">
+          <button class="admin-copy-btn" type="button" id="copyPromptGroup">Copy prompt</button>
+        </div>
       </div>
     </aside>
 

@@ -192,7 +192,6 @@
             '<span class="admin-id-label">Photo</span>' +
             '<span class="admin-id-number">#' + photo.id + '</span>' +
           '</div>' +
-          '<button class="admin-copy-btn admin-copy-btn--header" type="button" data-copy-text="' + escapeAttr(String(photo.id)) + '">Copy #</button>' +
         '</div>' +
         '<div class="admin-card-thumb">' +
           '<img src="' + thumb + '" alt="' + escapeAttr(photo.alt) + '" loading="lazy" data-full="' + escapeAttr(photo.src) + '" data-loading="true">' +
@@ -212,12 +211,15 @@
           '</dl>' +
           '<div class="admin-copy-actions">' +
             '<button class="admin-copy-btn admin-add-prompt-btn" type="button" data-photo-id="' + photo.id + '">Add to active group</button>' +
-            '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(buildCardPrompt(photo)) + '">Copy prompt</button>' +
-            (flickrUrl ? '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(flickrUrl) + '">Copy Flickr</button>' : '') +
           '</div>' +
           '<div class="admin-meta-url">' +
             '<code class="admin-url-text">' + escapeHtml(photo.src) + '</code>' +
+            '<div class="admin-url-actions">' +
+              '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(String(photo.id)) + '">Copy #</button>' +
+              '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(buildCardPrompt(photo)) + '">Copy prompt</button>' +
+              (flickrUrl ? '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(flickrUrl) + '">Copy Flickr</button>' : '') +
             '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(photo.src) + '">Copy image URL</button>' +
+            '</div>' +
           '</div>' +
         '</div>';
 
@@ -455,6 +457,17 @@
     createPromptGroup();
   }
 
+  function togglePromptPanel() {
+    var panel = document.querySelector('.admin-prompt-panel');
+    var button = document.getElementById('togglePromptPanel');
+    if (!panel || !button) return;
+
+    var willMinimize = panel.dataset.minimized !== 'true';
+    panel.dataset.minimized = willMinimize ? 'true' : 'false';
+    button.textContent = willMinimize ? 'Expand' : 'Minimize';
+    button.setAttribute('aria-expanded', String(!willMinimize));
+  }
+
   // Interactions
 
   function flashCopied(btn) {
@@ -554,12 +567,14 @@
   var filterFeatured = document.getElementById('filterFeatured');
   var addPromptGroup = document.getElementById('addPromptGroup');
   var clearPromptGroupsBtn = document.getElementById('clearPromptGroups');
+  var togglePromptPanelBtn = document.getElementById('togglePromptPanel');
 
   if (filterProject) filterProject.addEventListener('change', applyFilters);
   if (filterLocation) filterLocation.addEventListener('change', applyFilters);
   if (filterFeatured) filterFeatured.addEventListener('change', applyFilters);
   if (addPromptGroup) addPromptGroup.addEventListener('click', createPromptGroup);
   if (clearPromptGroupsBtn) clearPromptGroupsBtn.addEventListener('click', clearPromptGroups);
+  if (togglePromptPanelBtn) togglePromptPanelBtn.addEventListener('click', togglePromptPanel);
 
   buildProjectFilter();
   buildLocationFilter();

@@ -146,10 +146,6 @@ body {
   background: var(--a-sage);
   color: #fff;
   padding: 0.45rem 0.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.45rem;
 }
 
 .admin-id-main {
@@ -402,13 +398,6 @@ body {
   transition: background 0.12s ease, color 0.12s ease;
 }
 
-.admin-copy-btn--header {
-  border-color: rgba(255, 255, 255, 0.72);
-  color: #fff;
-  flex-shrink: 0;
-  padding: 0.22rem 0.55rem;
-}
-
 .admin-copy-btn:hover,
 .admin-copy-btn:focus {
   background: var(--a-terracotta);
@@ -438,11 +427,25 @@ body {
   gap: 0.55rem;
 }
 
+.admin-prompt-panel[data-minimized="true"] {
+  width: min(18rem, calc(100vw - 2rem));
+}
+
+.admin-prompt-panel[data-minimized="true"] .admin-prompt-body {
+  display: none;
+}
+
 .admin-prompt-header {
   display: flex;
   justify-content: space-between;
   gap: 0.75rem;
   align-items: flex-start;
+}
+
+.admin-prompt-header-actions {
+  display: grid;
+  justify-items: end;
+  gap: 0.25rem;
 }
 
 .admin-prompt-eyebrow {
@@ -466,6 +469,21 @@ body {
   font-size: 0.72rem;
   font-weight: 700;
   white-space: nowrap;
+}
+
+.admin-prompt-minimize {
+  border: 0;
+  background: transparent;
+  color: var(--a-muted);
+  cursor: pointer;
+  font-family: var(--a-font);
+  font-size: 0.72rem;
+  text-decoration: underline;
+}
+
+.admin-prompt-body {
+  display: grid;
+  gap: 0.55rem;
 }
 
 .admin-prompt-groups {
@@ -568,6 +586,12 @@ body {
   display: flex;
   gap: 0.45rem;
   flex-wrap: wrap;
+}
+
+.admin-url-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
 }
 
 /* Empty / error state */
