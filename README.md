@@ -43,7 +43,7 @@ The panel is **read-only** — it shows what's in `photo-data.js`. To change any
 - **Location** — show only photos assigned to a specific location
 - **Featured** — show only photos marked as carousel-featured
 
-The floating prompt maker can build one prompt with multiple location groups. Select the active group, choose its destination location, click **Add to active group** on the photos that belong there, then use **Add location group** for another destination.
+The floating prompt maker can build one prompt with multiple groups. Select the active group, choose its location, featured status, and project settings, click **Add to active group** on the photos that belong there, then use **Add location group** for another set of photos.
 
 ---
 
@@ -102,6 +102,27 @@ Lightroom -> Flickr -> Spreadsheet Intake -> Manual Review -> Repo Sync -> Admin
 ```
 
 Flickr is only the intake source. The Google Sheet is the control center. The repo should only publish photos that the spreadsheet explicitly marks as approved.
+
+#### Command: Add New Flickr Photos Directly
+
+When the user asks to add new photos from Flickr into the repo:
+
+1. Pull new public Flickr photos into `photo-data.js`:
+
+   ```powershell
+   npm.cmd run update:photos
+   ```
+
+2. New photos are added with these defaults:
+   - `is_featured: false`
+   - no `location`
+   - no `project`
+   - no `species`
+   - Flickr metadata and camera settings are saved when Flickr exposes them
+
+3. Open `admin.html` and use the Codex prompt maker to assign location, featured status, and project groups.
+
+The updater compares Flickr IDs against `photo-data.js` and skips duplicates.
 
 Live Google Sheet:
 
