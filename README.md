@@ -43,7 +43,7 @@ The panel is **read-only** — it shows what's in `photo-data.js`. To change any
 - **Location** — show only photos assigned to a specific location
 - **Featured** — show only photos marked as carousel-featured
 
-The floating prompt maker can build one prompt with multiple location groups. Select the active group, choose its destination location, click **Add to active group** on the photos that belong there, then use **Add location group** for another destination.
+The floating prompt maker can build one prompt with multiple groups. Select the active group, choose its location, featured status, and project settings, click **Add to active group** on the photos that belong there, then use **Add location group** for another set of photos.
 
 ---
 

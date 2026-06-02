@@ -268,6 +268,8 @@
     var group = {
       id: nextPromptGroupId,
       location: '',
+      featured: '',
+      project: '',
       photoIds: new Set()
     };
     nextPromptGroupId += 1;
@@ -292,10 +294,20 @@
   function buildGroupPrompt() {
     var lines = promptGroups
       .filter(function (group) {
-        return group.photoIds.size && group.location;
+        return group.photoIds.size && (group.location || group.featured || group.project);
       })
       .map(function (group) {
-        return 'Update photos ' + selectedIdsText(group.photoIds) + ': set location to ' + getLocationName(group.location) + '.';
+        var actions = [];
+        if (group.location) {
+          actions.push('set location to ' + getLocationName(group.location));
+        }
+        if (group.featured) {
+          actions.push('set featured to ' + group.featured);
+        }
+        if (group.project) {
+          actions.push('set project to ' + (group.project === '__none__' ? 'none' : group.project));
+        }
+        return 'Update photos ' + selectedIdsText(group.photoIds) + ': ' + actions.join('; ') + '.';
       });
 
     return lines.join('\n');
@@ -310,6 +322,36 @@
         '</option>';
       })
       .join('');
+  }
+
+  function buildFeaturedOptions(selectedValue) {
+    var options = [
+      { value: '', label: 'Leave featured unchanged' },
+      { value: 'true', label: 'Featured: true' },
+      { value: 'false', label: 'Featured: false' }
+    ];
+    return options.map(function (option) {
+      return '<option value="' + escapeAttr(option.value) + '"' + (option.value === selectedValue ? ' selected' : '') + '>' +
+        escapeHtml(option.label) +
+      '</option>';
+    }).join('');
+  }
+
+  function buildProjectOptions(selectedValue) {
+    var options = [
+      { value: '', label: 'Leave project unchanged' },
+      { value: '__none__', label: 'No project' }
+    ].concat(getProjectOptions()
+      .filter(function (project) { return project; })
+      .map(function (project) {
+        return { value: project, label: project };
+      }));
+
+    return options.map(function (option) {
+      return '<option value="' + escapeAttr(option.value) + '"' + (option.value === selectedValue ? ' selected' : '') + '>' +
+        escapeHtml(option.label) +
+      '</option>';
+    }).join('');
   }
 
   function renderPromptGroups() {
@@ -327,13 +369,27 @@
           '<span class="admin-prompt-group-count">' + group.photoIds.size + ' selected</span>' +
           (promptGroups.length > 1 ? '<button class="admin-prompt-remove" type="button" data-remove-group="' + group.id + '">Remove</button>' : '') +
         '</div>' +
-        '<label class="admin-prompt-field">' +
-          '<span>Set location</span>' +
-          '<select class="admin-select admin-prompt-select" data-group-location="' + group.id + '">' +
-            '<option value="">Choose location</option>' +
-            buildLocationOptions(group.location) +
-          '</select>' +
-        '</label>' +
+        '<div class="admin-prompt-fields">' +
+          '<label class="admin-prompt-field">' +
+            '<span>Location</span>' +
+            '<select class="admin-select admin-prompt-select" data-group-field="location" data-group-id="' + group.id + '">' +
+              '<option value="">Leave location unchanged</option>' +
+              buildLocationOptions(group.location) +
+            '</select>' +
+          '</label>' +
+          '<label class="admin-prompt-field">' +
+            '<span>Featured</span>' +
+            '<select class="admin-select admin-prompt-select" data-group-field="featured" data-group-id="' + group.id + '">' +
+              buildFeaturedOptions(group.featured) +
+            '</select>' +
+          '</label>' +
+          '<label class="admin-prompt-field">' +
+            '<span>Project</span>' +
+            '<select class="admin-select admin-prompt-select" data-group-field="project" data-group-id="' + group.id + '">' +
+              buildProjectOptions(group.project) +
+            '</select>' +
+          '</label>' +
+        '</div>' +
         '<p class="admin-prompt-selected">' + (group.photoIds.size ? selectedIdsText(group.photoIds) : 'No photos selected') + '</p>' +
       '</section>';
     }).join('');
@@ -478,12 +534,15 @@
       return;
     }
 
-    if (event.target.matches('[data-group-location]')) {
-      var groupId = Number(event.target.dataset.groupLocation);
+    if (event.target.matches('[data-group-field]')) {
+      var groupId = Number(event.target.dataset.groupId);
+      var field = event.target.dataset.groupField;
       var group = promptGroups.find(function (item) {
         return item.id === groupId;
       });
-      if (group) group.location = event.target.value;
+      if (group && Object.prototype.hasOwnProperty.call(group, field)) {
+        group[field] = event.target.value;
+      }
       updatePromptPanel();
     }
   });
