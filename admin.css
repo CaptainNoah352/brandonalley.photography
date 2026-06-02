@@ -106,12 +106,51 @@ body {
   letter-spacing: 0.04em;
 }
 
+/* Sections */
+.admin-special-section,
+.admin-site-section {
+  padding: 1.5rem 1.5rem 0;
+}
+
+.admin-site-section {
+  padding-top: 0.75rem;
+}
+
+.admin-section-heading {
+  display: grid;
+  gap: 0.15rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-section-eyebrow {
+  color: var(--a-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.admin-section-heading h2 {
+  color: var(--a-text);
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
 /* Grid */
 .admin-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   gap: 1.25rem;
   padding: 1.5rem;
+}
+
+.admin-special-section .admin-grid,
+.admin-site-section .admin-grid {
+  padding: 0;
+}
+
+.admin-grid--special {
+  grid-template-columns: minmax(270px, 360px);
 }
 
 /* Cards */
@@ -141,6 +180,10 @@ body {
   display: none;
 }
 
+.admin-card--special {
+  border-color: rgba(46, 66, 40, 0.32);
+}
+
 /* ID badge */
 .admin-card-id {
   background: var(--a-sage);
@@ -167,6 +210,12 @@ body {
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
+}
+
+.admin-id-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .admin-metadata-toggle {
@@ -639,6 +688,11 @@ body {
     grid-template-columns: 1fr;
     padding: 1rem;
     gap: 1rem;
+  }
+
+  .admin-special-section,
+  .admin-site-section {
+    padding: 1rem 1rem 0;
   }
 
   .admin-controls {

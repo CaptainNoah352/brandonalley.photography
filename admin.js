@@ -157,9 +157,96 @@
     return badges.join('');
   }
 
+  function buildPhotoCard(photo, options) {
+    var isSpecial = options && options.special;
+    var article = document.createElement('article');
+    article.className = isSpecial ? 'admin-card admin-card--special' : 'admin-card';
+    article.dataset.id = photo.id;
+    article.dataset.project = photo.project || '';
+    article.dataset.location = photo.location || '';
+    article.dataset.featured = photo.is_featured ? 'true' : 'false';
+    article.dataset.usage = photo.usage || 'gallery';
+
+    var thumb = thumbUrl(photo.src);
+    var flickrUrl = getFlickrUrl(photo);
+    var metadataLabel = isSpecial ? 'about me photo' : 'photo #' + photo.id;
+    var header = isSpecial
+      ? '<div class="admin-card-id admin-card-id--special">' +
+          '<div class="admin-id-main">' +
+            '<span class="admin-id-label">About me</span>' +
+            '<span class="admin-id-title">Page photo</span>' +
+          '</div>' +
+        '</div>'
+      : '<div class="admin-card-id">' +
+          '<div class="admin-id-main">' +
+            '<span class="admin-id-label">Photo</span>' +
+            '<span class="admin-id-number">#' + photo.id + '</span>' +
+          '</div>' +
+        '</div>';
+    var details = isSpecial
+      ? '<dl class="admin-details">' +
+          '<div><dt>Use</dt><dd>' + escapeHtml(getUsageLabel(photo)) + '</dd></div>' +
+          '<div><dt>Page</dt><dd>About me</dd></div>' +
+          '<div><dt>Featured</dt><dd>No</dd></div>' +
+        '</dl>'
+      : '<dl class="admin-details">' +
+          '<div><dt>ID</dt><dd>#' + photo.id + '</dd></div>' +
+          '<div><dt>Location</dt><dd>' + escapeHtml(getLocationName(photo.location)) + '</dd></div>' +
+          '<div><dt>Project</dt><dd>' + escapeHtml(photo.project || 'None') + '</dd></div>' +
+          '<div><dt>Featured</dt><dd>' + (photo.is_featured ? 'Yes' : 'No') + '</dd></div>' +
+          '<div><dt>Use</dt><dd>' + escapeHtml(getUsageLabel(photo)) + '</dd></div>' +
+        '</dl>';
+    var promptActions = isSpecial
+      ? ''
+      : '<div class="admin-copy-actions">' +
+          '<button class="admin-copy-btn admin-add-prompt-btn" type="button" data-photo-id="' + photo.id + '">Add to active group</button>' +
+        '</div>';
+    var copyNumberButton = isSpecial
+      ? ''
+      : '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(String(photo.id)) + '">Copy #</button>';
+
+    article.innerHTML =
+      header +
+      '<div class="admin-card-thumb">' +
+        '<img src="' + thumb + '" alt="' + escapeAttr(photo.alt) + '" loading="lazy" data-full="' + escapeAttr(photo.src) + '" data-loading="true">' +
+        '<button class="admin-metadata-toggle" type="button" aria-expanded="false" aria-label="Show metadata for ' + metadataLabel + '" data-photo-id="' + photo.id + '">i</button>' +
+      '</div>' +
+      '<div class="admin-card-meta">' +
+        '<div class="admin-photo-metadata" id="adminMetadata' + photo.id + '" hidden>' + buildMetadataRows(photo) + '</div>' +
+        '<p class="admin-meta-alt">' + escapeHtml(photo.alt) + '</p>' +
+        '<div class="admin-badges">' + buildBadges(photo) + '</div>' +
+        (photo.species ? '<p class="admin-meta-species">' + escapeHtml(photo.species) + '</p>' : '') +
+        details +
+        promptActions +
+        '<div class="admin-meta-url">' +
+          '<code class="admin-url-text">' + escapeHtml(photo.src) + '</code>' +
+          '<div class="admin-url-actions">' +
+            copyNumberButton +
+            (flickrUrl ? '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(flickrUrl) + '">Copy Flickr</button>' : '') +
+            '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(photo.src) + '">Copy image URL</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    var img = article.querySelector('.admin-card-thumb img');
+    img.addEventListener('load', function () {
+      this.removeAttribute('data-loading');
+    });
+    img.addEventListener('error', function () {
+      this.src = photo.src;
+      this.removeAttribute('data-loading');
+      this.onerror = null;
+    });
+
+    return article;
+  }
+
   function renderCards() {
     var grid = document.getElementById('adminGrid');
+    var aboutGrid = document.getElementById('adminAboutGrid');
+    var aboutSection = document.getElementById('aboutPhotoSection');
     if (!grid) return;
+    if (aboutGrid) aboutGrid.innerHTML = '';
 
     if (typeof GALLERY_IMAGES === 'undefined' || !GALLERY_IMAGES.length) {
       grid.innerHTML =
@@ -171,66 +258,16 @@
     }
 
     GALLERY_IMAGES.forEach(function (photo) {
-      var article = document.createElement('article');
-      article.className = 'admin-card';
-      article.dataset.id = photo.id;
-      article.dataset.project = photo.project || '';
-      article.dataset.location = photo.location || '';
-      article.dataset.featured = photo.is_featured ? 'true' : 'false';
-      article.dataset.usage = photo.usage || 'gallery';
-
-      var thumb = thumbUrl(photo.src);
-      var flickrUrl = getFlickrUrl(photo);
-
-      article.innerHTML =
-        '<div class="admin-card-id">' +
-          '<div class="admin-id-main">' +
-            '<span class="admin-id-label">Photo</span>' +
-            '<span class="admin-id-number">#' + photo.id + '</span>' +
-          '</div>' +
-        '</div>' +
-        '<div class="admin-card-thumb">' +
-          '<img src="' + thumb + '" alt="' + escapeAttr(photo.alt) + '" loading="lazy" data-full="' + escapeAttr(photo.src) + '" data-loading="true">' +
-          '<button class="admin-metadata-toggle" type="button" aria-expanded="false" aria-label="Show metadata for photo #' + photo.id + '" data-photo-id="' + photo.id + '">i</button>' +
-        '</div>' +
-        '<div class="admin-card-meta">' +
-          '<div class="admin-photo-metadata" id="adminMetadata' + photo.id + '" hidden>' + buildMetadataRows(photo) + '</div>' +
-          '<p class="admin-meta-alt">' + escapeHtml(photo.alt) + '</p>' +
-          '<div class="admin-badges">' + buildBadges(photo) + '</div>' +
-          (photo.species ? '<p class="admin-meta-species">' + escapeHtml(photo.species) + '</p>' : '') +
-          '<dl class="admin-details">' +
-            '<div><dt>ID</dt><dd>#' + photo.id + '</dd></div>' +
-            '<div><dt>Location</dt><dd>' + escapeHtml(getLocationName(photo.location)) + '</dd></div>' +
-            '<div><dt>Project</dt><dd>' + escapeHtml(photo.project || 'None') + '</dd></div>' +
-            '<div><dt>Featured</dt><dd>' + (photo.is_featured ? 'Yes' : 'No') + '</dd></div>' +
-            '<div><dt>Use</dt><dd>' + escapeHtml(getUsageLabel(photo)) + '</dd></div>' +
-          '</dl>' +
-          '<div class="admin-copy-actions">' +
-            '<button class="admin-copy-btn admin-add-prompt-btn" type="button" data-photo-id="' + photo.id + '">Add to active group</button>' +
-          '</div>' +
-          '<div class="admin-meta-url">' +
-            '<code class="admin-url-text">' + escapeHtml(photo.src) + '</code>' +
-            '<div class="admin-url-actions">' +
-              '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(String(photo.id)) + '">Copy #</button>' +
-              (flickrUrl ? '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(flickrUrl) + '">Copy Flickr</button>' : '') +
-            '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(photo.src) + '">Copy image URL</button>' +
-            '</div>' +
-          '</div>' +
-        '</div>';
-
-      var img = article.querySelector('.admin-card-thumb img');
-      img.addEventListener('load', function () {
-        this.removeAttribute('data-loading');
-      });
-      img.addEventListener('error', function () {
-        this.src = photo.src;
-        this.removeAttribute('data-loading');
-        this.onerror = null;
-      });
-
-      grid.appendChild(article);
+      if (photo.usage === 'about' && aboutGrid) {
+        aboutGrid.appendChild(buildPhotoCard(photo, { special: true }));
+        return;
+      }
+      grid.appendChild(buildPhotoCard(photo));
     });
 
+    if (aboutSection && aboutGrid) {
+      aboutSection.hidden = !aboutGrid.children.length;
+    }
     updateCount();
   }
 
@@ -239,7 +276,7 @@
     var locationFilter = document.getElementById('filterLocation').value;
     var featuredFilter = document.getElementById('filterFeatured').value;
 
-    document.querySelectorAll('.admin-card').forEach(function (card) {
+    document.querySelectorAll('#adminGrid .admin-card').forEach(function (card) {
       var matchProject = projectFilter === 'all' || card.dataset.project === projectFilter;
       var matchLocation = locationFilter === 'all' || card.dataset.location === locationFilter;
       var matchFeatured = featuredFilter === 'all' || card.dataset.featured === featuredFilter;
@@ -249,8 +286,8 @@
   }
 
   function updateCount() {
-    var total = document.querySelectorAll('.admin-card').length;
-    var visible = document.querySelectorAll('.admin-card:not([hidden])').length;
+    var total = document.querySelectorAll('#adminGrid .admin-card').length;
+    var visible = document.querySelectorAll('#adminGrid .admin-card:not([hidden])').length;
     var el = document.getElementById('adminCount');
     if (el) el.textContent = 'Showing ' + visible + ' of ' + total + ' photos';
   }
