@@ -103,6 +103,27 @@ Lightroom -> Flickr -> Spreadsheet Intake -> Manual Review -> Repo Sync -> Admin
 
 Flickr is only the intake source. The Google Sheet is the control center. The repo should only publish photos that the spreadsheet explicitly marks as approved.
 
+#### Command: Add New Flickr Photos Directly
+
+When the user asks to add new photos from Flickr into the repo:
+
+1. Pull new public Flickr photos into `photo-data.js`:
+
+   ```powershell
+   npm.cmd run update:photos
+   ```
+
+2. New photos are added with these defaults:
+   - `is_featured: false`
+   - no `location`
+   - no `project`
+   - no `species`
+   - Flickr metadata and camera settings are saved when Flickr exposes them
+
+3. Open `admin.html` and use the Codex prompt maker to assign location, featured status, and project groups.
+
+The updater compares Flickr IDs against `photo-data.js` and skips duplicates.
+
 Live Google Sheet:
 
 ```text
