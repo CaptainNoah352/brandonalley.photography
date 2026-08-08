@@ -1,3 +1,10 @@
+// Public Cloudinary delivery configuration. Add the cloud name from the
+// Cloudinary dashboard, then use cloudinaryPublicId on each photo entry.
+// API keys and API secrets must never be committed here.
+var CLOUDINARY_CONFIG = {
+  cloudName: "",
+};
+
 var SPECIES_DATA = {
   "Ardea herodias": {
     range: "Found throughout North America from southern Canada to Mexico and the Caribbean. A year-round resident across all of Florida.",
@@ -112,7 +119,8 @@ var SPECIES_DATA = {
 // Edit these to add or change photos.
 // Duplicate an entry to add a photo. Remove an entry to remove it.
 // - id:          stable integer — never change or reuse once assigned
-// - src:         full image URL
+// - cloudinaryPublicId: Cloudinary asset public ID (preferred)
+// - src:         legacy/fallback image URL while an asset is being migrated
 // - alt:         describe the photo (used in lightbox caption)
 // - is_featured: true = shows in the homepage carousel
 // - project:     project slug, e.g. "herons" — adds photo to that project gallery

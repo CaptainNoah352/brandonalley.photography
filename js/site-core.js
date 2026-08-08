@@ -76,11 +76,12 @@ function normalizeGalleryImages(images) {
   if (!Array.isArray(images)) return [];
   return images
     .map((image) => {
-      const src = (image?.src || image?.image_url || "").toString().trim();
+      const src = cloudinaryImageUrl(image);
       if (!src) return null;
       return {
         ...image,
         src,
+        srcset: cloudinarySrcset(image),
         alt: (image?.alt || image?.title || "Portfolio photo").toString(),
       };
     })

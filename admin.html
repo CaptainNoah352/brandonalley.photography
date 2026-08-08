@@ -93,9 +93,14 @@
         var dataScript = document.createElement("script");
         dataScript.src = "photo-data.js?v=" + cacheBust;
         dataScript.onload = function () {
-          var adminScript = document.createElement("script");
-          adminScript.src = "admin.js?v=" + cacheBust;
-          document.body.appendChild(adminScript);
+          var cloudinaryScript = document.createElement("script");
+          cloudinaryScript.src = "js/cloudinary.js?v=" + cacheBust;
+          cloudinaryScript.onload = function () {
+            var adminScript = document.createElement("script");
+            adminScript.src = "admin.js?v=" + cacheBust;
+            document.body.appendChild(adminScript);
+          };
+          document.body.appendChild(cloudinaryScript);
         };
         document.body.appendChild(dataScript);
       }());

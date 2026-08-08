@@ -28,6 +28,8 @@ function renderGallery(images) {
 
     const img = document.createElement("img");
     img.src = image.src;
+    if (image.srcset) img.srcset = image.srcset;
+    img.sizes = "(max-width: 700px) 100vw, 50vw";
     img.alt = image.alt;
     img.loading = "lazy";
     img.decoding = "async";

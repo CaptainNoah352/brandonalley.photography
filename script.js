@@ -48,6 +48,15 @@ function initializeGallery() {
 
   state.orderedGalleryImages = normalizeGalleryImages(seededShuffle(getPublicGalleryImages(), "v1"));
 
+  const aboutPortrait = document.getElementById("aboutPortraitImage");
+  const aboutPhoto = normalizeGalleryImages(GALLERY_IMAGES.filter((image) => image.usage === "about"))[0];
+  if (aboutPortrait && aboutPhoto) {
+    aboutPortrait.src = aboutPhoto.src;
+    if (aboutPhoto.srcset) aboutPortrait.srcset = aboutPhoto.srcset;
+    aboutPortrait.sizes = "(max-width: 700px) 100vw, 50vw";
+    aboutPortrait.alt = aboutPhoto.alt;
+  }
+
   renderCurrentPageGallery();
   initializeScrollReveal();
   requestAnimationFrame(alignInitialHashTarget);

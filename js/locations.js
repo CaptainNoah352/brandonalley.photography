@@ -29,7 +29,7 @@ function createLocationCard(location, options = {}) {
   article.innerHTML = `
     <a class="location-card-link" href="${href}" aria-label="View photos from ${location.name}">
       <figure class="location-card-figure">
-        ${cover ? `<img src="${cover.src}" alt="${cover.alt || location.name}" loading="lazy" decoding="async">` : ""}
+        ${cover ? `<img src="${cover.src}"${cover.srcset ? ` srcset="${cover.srcset}"` : ""} sizes="(max-width: 700px) 100vw, 33vw" alt="${cover.alt || location.name}" loading="lazy" decoding="async">` : ""}
       </figure>
       <div class="location-card-body">
         <p class="location-card-kicker">${location.status || "Location"}</p>
@@ -96,6 +96,8 @@ function renderLocationsPage() {
 
     const img = document.createElement("img");
     img.src = image.src;
+    if (image.srcset) img.srcset = image.srcset;
+    img.sizes = "(max-width: 700px) 100vw, 50vw";
     img.alt = image.alt;
     img.loading = "lazy";
     img.decoding = "async";
