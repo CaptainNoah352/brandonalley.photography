@@ -11,7 +11,7 @@
     <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body data-page="home">
@@ -74,12 +74,17 @@
     </div>
 
     <main>
-      <section class="home-intro" aria-label="Introduction">
+      <section class="home-intro" aria-labelledby="home-hero-title">
+        <img class="home-intro-image" id="homeHeroImage" alt="" />
         <div class="home-intro-inner">
           <p class="home-intro-eyebrow">Brandon Alley Photography</p>
-          <h1 class="home-intro-headline">Finding stillness<br>in the wild</h1>
+          <h1 class="home-intro-headline" id="home-hero-title">Finding stillness<br>in the wild</h1>
           <p class="home-intro-tagline">Film, wildlife, and the quiet light between moments.</p>
-          <div class="home-intro-rule" aria-hidden="true"></div>
+          <div class="hero-actions">
+            <a class="button button--primary" href="portfolio.html">Explore portfolio</a>
+            <a class="button button--secondary button--on-dark" href="about.html">About Brandon</a>
+          </div>
+          <p class="home-intro-detail" id="homeHeroDetail" hidden></p>
         </div>
         <div class="home-intro-scroll" aria-hidden="true">
           <span>scroll</span>
@@ -106,7 +111,7 @@
         </div>
         <div class="container">
           <div class="home-gallery-footer">
-            <a href="portfolio.html" class="home-view-portfolio-btn">View Full Portfolio</a>
+            <a href="portfolio.html" class="button button--secondary">View full portfolio</a>
           </div>
         </div>
       </section>
@@ -120,7 +125,7 @@
           </div>
           <div class="locations-grid locations-grid--home" id="homeLocationsGrid"></div>
           <div class="home-gallery-footer">
-            <a href="locations.html" class="home-view-portfolio-btn">View Locations</a>
+            <a href="locations.html" class="button button--secondary">View locations</a>
           </div>
         </div>
       </section>

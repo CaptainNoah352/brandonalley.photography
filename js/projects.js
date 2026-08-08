@@ -23,6 +23,9 @@ function renderProjectGallery(projectSlug) {
   projectImages.forEach((image) => {
     const article = document.createElement("article");
     article.className = "gallery-item";
+    article.tabIndex = 0;
+    article.setAttribute("role", "button");
+    article.setAttribute("aria-label", `Open photo: ${image.alt || "Gallery photo"}`);
 
     const img = document.createElement("img");
     img.src = image.src;
@@ -48,8 +51,17 @@ function renderProjectGallery(projectSlug) {
       if (img.dataset.broken === "true") return;
       openLightboxByImageNode(img);
     });
+    article.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      if (img.dataset.broken !== "true") openLightboxByImageNode(img);
+    });
 
     article.appendChild(img);
+    const caption = document.createElement("p");
+    caption.className = "gallery-item-caption";
+    caption.textContent = image.alt || "Gallery photo";
+    article.appendChild(caption);
     container.appendChild(article);
   });
 
