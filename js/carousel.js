@@ -1,5 +1,31 @@
 // Homepage featured carousel.
 
+function renderHomepageHero(images) {
+  if (!dom.homeHeroImage) return;
+  const normalizedImages = normalizeGalleryImages(images);
+  const image = normalizedImages.find((item) => item.is_featured) || normalizedImages[0];
+
+  if (!image) {
+    dom.homeHeroImage.removeAttribute("src");
+    dom.homeHeroImage.closest(".home-intro")?.classList.add("home-intro--fallback");
+    return;
+  }
+
+  dom.homeHeroImage.src = image.src;
+  dom.homeHeroImage.alt = image.alt || "Featured nature photograph";
+  dom.homeHeroImage.loading = "eager";
+  dom.homeHeroImage.decoding = "async";
+  dom.homeHeroImage.fetchPriority = "high";
+
+  const location = getLocationsData().find((item) => item.slug === image.location);
+  const metadata = getFlickrMetadata(image.id);
+  const detail = location?.name || metadata?.title || image.alt;
+  if (dom.homeHeroDetail && detail) {
+    dom.homeHeroDetail.textContent = detail;
+    dom.homeHeroDetail.hidden = false;
+  }
+}
+
 function renderFeaturedCarousel(images) {
   if (!dom.homeCarousel || !dom.carouselTrack || !dom.carouselDots) return;
 
@@ -77,6 +103,7 @@ function renderFeaturedCarousel(images) {
 
   function startAuto() {
     clearInterval(autoTimer);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || slides.length < 2) return;
     autoTimer = setInterval(() => goToSlide(currentIndex + 1), 4500);
   }
 

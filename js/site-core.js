@@ -20,6 +20,8 @@ const dom = {
   carouselPrev: document.getElementById("carouselPrev"),
   carouselNext: document.getElementById("carouselNext"),
   carouselDots: document.getElementById("carouselDots"),
+  homeHeroImage: document.getElementById("homeHeroImage"),
+  homeHeroDetail: document.getElementById("homeHeroDetail"),
   lightbox: document.getElementById("lightbox"),
   lightboxImage: document.getElementById("lightboxImage"),
   lightboxCaption: document.getElementById("lightboxCaption"),

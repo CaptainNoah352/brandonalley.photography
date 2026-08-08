@@ -2,6 +2,7 @@
 
 function renderCurrentPageGallery() {
   if (pageType === "home") {
+    renderHomepageHero(state.orderedGalleryImages);
     renderFeaturedCarousel(state.orderedGalleryImages);
     renderHomeLocationPreview();
     return;
