@@ -4,6 +4,9 @@
   // Shared helpers
 
   function thumbUrl(src) {
+    if (/res\.cloudinary\.com/i.test(src)) {
+      return src.replace('/image/upload/', '/image/upload/c_fill,w_600,h_400,q_auto:good,f_auto/');
+    }
     return src.replace(/_[a-z]\.jpg$/i, '_m.jpg');
   }
 
@@ -167,7 +170,8 @@
     article.dataset.featured = photo.is_featured ? 'true' : 'false';
     article.dataset.usage = photo.usage || 'gallery';
 
-    var thumb = thumbUrl(photo.src);
+    var fullUrl = cloudinaryImageUrl(photo, { original: true });
+    var thumb = photo.cloudinaryPublicId ? cloudinaryImageUrl(photo, { width: 600 }) : thumbUrl(fullUrl);
     var flickrUrl = getFlickrUrl(photo);
     var metadataLabel = isSpecial ? 'about me photo' : 'photo #' + photo.id;
     var header = isSpecial
@@ -208,7 +212,7 @@
     article.innerHTML =
       header +
       '<div class="admin-card-thumb">' +
-        '<img src="' + thumb + '" alt="' + escapeAttr(photo.alt) + '" loading="lazy" data-full="' + escapeAttr(photo.src) + '" data-loading="true">' +
+        '<img src="' + thumb + '" alt="' + escapeAttr(photo.alt) + '" loading="lazy" data-full="' + escapeAttr(fullUrl) + '" data-loading="true">' +
         '<button class="admin-metadata-toggle" type="button" aria-expanded="false" aria-label="Show metadata for ' + metadataLabel + '" data-photo-id="' + photo.id + '">i</button>' +
       '</div>' +
       '<div class="admin-card-meta">' +
@@ -219,11 +223,11 @@
         details +
         promptActions +
         '<div class="admin-meta-url">' +
-          '<code class="admin-url-text">' + escapeHtml(photo.src) + '</code>' +
+          '<code class="admin-url-text">' + escapeHtml(fullUrl) + '</code>' +
           '<div class="admin-url-actions">' +
             copyNumberButton +
             (flickrUrl ? '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(flickrUrl) + '">Copy Flickr</button>' : '') +
-            '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(photo.src) + '">Copy image URL</button>' +
+            '<button class="admin-copy-btn" type="button" data-copy-text="' + escapeAttr(fullUrl) + '">Copy image URL</button>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -233,7 +237,7 @@
       this.removeAttribute('data-loading');
     });
     img.addEventListener('error', function () {
-      this.src = photo.src;
+      this.src = fullUrl;
       this.removeAttribute('data-loading');
       this.onerror = null;
     });

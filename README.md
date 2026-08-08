@@ -66,7 +66,9 @@ All photo data lives in the `GALLERY_IMAGES` array in `photo-data.js`.
 | Field | Required | Description |
 |---|---|---|
 | `id` | Yes | Stable integer. Never change or reuse. New photos get the next number after the last entry. |
-| `src` | Yes | Full Flickr image URL (use `_b.jpg` suffix for full resolution) |
+| `cloudinaryPublicId` | Preferred | Cloudinary asset public ID, such as `portfolio/photo-26`. |
+| `cloudinaryVersion` | No | Version returned by Cloudinary; enables reliable cache invalidation. |
+| `src` | During migration | Legacy Flickr URL used as a fallback until Cloudinary is configured. |
 | `alt` | Yes | Photo description — shown as the lightbox caption |
 | `is_featured` | No | `true` = included in the homepage carousel |
 | `project` | No | Project slug (e.g. `"herons"`) — adds the photo to that project gallery |
@@ -78,7 +80,9 @@ All photo data lives in the `GALLERY_IMAGES` array in `photo-data.js`.
 ```js
 {
   id: 26,
-  src: "https://live.staticflickr.com/65535/PHOTOID_HASH_b.jpg",
+  cloudinaryPublicId: "portfolio/photo-26",
+  cloudinaryVersion: 1786200000,
+  src: "https://live.staticflickr.com/65535/PHOTOID_HASH_b.jpg", // rollback fallback
   alt: "Great Blue Heron wading at sunrise",
   is_featured: true,
   project: "herons",
@@ -88,6 +92,18 @@ All photo data lives in the `GALLERY_IMAGES` array in `photo-data.js`.
 ```
 
 Photo #7 is the About-page portrait. Keep `usage: "about"` on that photo and do not use it as a normal featured/gallery photo unless the About portrait is being changed.
+
+### Cloudinary image delivery
+
+Set `CLOUDINARY_CONFIG.cloudName` near the top of `photo-data.js`, upload full-resolution originals to Cloudinary, and save each asset's `public_id` as `cloudinaryPublicId`. The site then generates responsive URLs with automatic format, quality, and device-pixel-ratio selection. The cloud name and public IDs are safe to publish, but **never commit an API key or API secret**.
+
+To migrate the current Flickr-backed files automatically, copy `CLOUDINARY_URL` from the Cloudinary dashboard into your shell and run:
+
+```bash
+CLOUDINARY_URL='cloudinary://API_KEY:API_SECRET@CLOUD_NAME' npm run migrate:cloudinary -- --apply
+```
+
+Without `--apply`, the command is a no-op. The migration stores Cloudinary public IDs and versions in `photo-data.js` and retains Flickr URLs as rollback fallbacks. Flickr `_b` files are resolution-limited, so upload original exports directly to Cloudinary when maximum resolution is the goal.
 
 ---
 

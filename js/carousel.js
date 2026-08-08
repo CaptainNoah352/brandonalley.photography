@@ -12,6 +12,8 @@ function renderHomepageHero(images) {
   }
 
   dom.homeHeroImage.src = image.src;
+  if (image.srcset) dom.homeHeroImage.srcset = image.srcset;
+  dom.homeHeroImage.sizes = "100vw";
   dom.homeHeroImage.alt = image.alt || "Featured nature photograph";
   dom.homeHeroImage.loading = "eager";
   dom.homeHeroImage.decoding = "async";
@@ -47,6 +49,8 @@ function renderFeaturedCarousel(images) {
 
     const img = document.createElement("img");
     img.src = image.src;
+    if (image.srcset) img.srcset = image.srcset;
+    img.sizes = "100vw";
     img.alt = image.alt || "";
     img.loading = i === 0 ? "eager" : "lazy";
     img.decoding = "async";
